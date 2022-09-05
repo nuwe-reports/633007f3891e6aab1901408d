@@ -42,25 +42,25 @@ const ResponsiveAppBar = ({ setOpenMessage, setMssg, mssg, openMessage }) => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <div>
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontSize: "2rem",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              <img src={Logo} alt="Rick and Morty" width="200px"></img>
-            </Typography>
-          </div>
+          {/* -- navbar large */}
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontSize: "2rem",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            <img src={Logo} alt="Rick and Morty" width="200px"></img>
+          </Typography>
+
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -92,13 +92,8 @@ const ResponsiveAppBar = ({ setOpenMessage, setMssg, mssg, openMessage }) => {
             >
               <>
                 <MenuItem key="Myfavs" onClick={handleCloseNavMenu}>
-                  <Link underline="none" color="inherit" href="/users">
-                    <Typography textAlign="center">My favs ♥️</Typography>
-                  </Link>
-                </MenuItem>
-                <MenuItem key="Myfavs" onClick={handleCloseNavMenu}>
-                  <Link underline="none" color="inherit" href="/users">
-                    <Typography textAlign="center">User account</Typography>
+                  <Link underline="none" color="inherit" href="/user">
+                    <Typography textAlign="center">♥️</Typography>
                   </Link>
                 </MenuItem>
               </>
@@ -106,7 +101,6 @@ const ResponsiveAppBar = ({ setOpenMessage, setMssg, mssg, openMessage }) => {
               <MenuItem key="Login" onClick={handleCloseNavMenu}>
                 <Link underline="none" color="inherit">
                   <Typography textAlign="center">
-                    {" "}
                     <UserButton />
                   </Typography>
                 </Link>
@@ -123,7 +117,6 @@ const ResponsiveAppBar = ({ setOpenMessage, setMssg, mssg, openMessage }) => {
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 2,
-
               fontWeight: 700,
               letterSpacing: ".3rem",
               color: "inherit",
@@ -145,17 +138,9 @@ const ResponsiveAppBar = ({ setOpenMessage, setMssg, mssg, openMessage }) => {
                 key="myFavs"
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "secondary.main", display: "block" }}
-                href="/users"
+                href="/user"
               >
-                My favs ♥️
-              </Button>
-              <Button
-                key="myFavs"
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "secondary.main", display: "block" }}
-                href="/users"
-              >
-                User account
+                ♥️
               </Button>
             </>
 
@@ -167,6 +152,7 @@ const ResponsiveAppBar = ({ setOpenMessage, setMssg, mssg, openMessage }) => {
             ></UserButton>
           </Box>
 
+          {/* toggle dark theme  */}
           <Box sx={{ flexGrow: 0, width: { xs: "10%", md: "5%" } }}>
             <ToggleBTN></ToggleBTN>
           </Box>

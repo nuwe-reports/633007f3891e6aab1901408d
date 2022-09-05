@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card } from "./Card";
 import CharInfo from "./CharInfo";
-
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 
 import { useUserContext } from "../context/UserContext";
@@ -62,8 +61,7 @@ function Character({ item, openCharInf, setOpenCharInf }) {
   }
   function addToFavs(event) {
     event.preventDefault();
-
-    userFavs.setFavChars([...item]);
+    userFavs.setFavChars([...userFavs.favChars, item]);
   }
 
   function removeFromFavs(event) {
@@ -72,20 +70,20 @@ function Character({ item, openCharInf, setOpenCharInf }) {
 
   return (
     <>
-      {item.title === openCharInf[0].name ? (
+      {item.name === openCharInf[0].name ? (
         <Grid item xs="10" sm="9" md="6" lg="6" xl="6">
           <Card>
             <div>
               <Button onClick={toggleInfo}>
                 <div>
-                  <img src={item.image} alt={item.title} />
+                  <img src={item.image} alt={item.name} />
                 </div>
               </Button>
 
               <div>
                 <CharInfo item={item}></CharInfo>
                 <div>
-                  {userFavs.favMovies.some((x) => x.name === item.name) ? (
+                  {userFavs.favChars.some((x) => x.name === item.name) ? (
                     <>
                       <Button onClick={removeFromFavs}>
                         <Favorite
@@ -113,12 +111,13 @@ function Character({ item, openCharInf, setOpenCharInf }) {
             <div>
               <Button onClick={toggleInfo}>
                 <div>
-                  <img src={item.poster} alt={item.title} />
+                  <Typography>{item.name}</Typography>
+                  <img src={item.image} alt={item.name} />
                 </div>
               </Button>
 
               <div>
-                {userFavs.favMovies.some((x) => x.title === item.title) ? (
+                {userFavs.favChars.some((x) => x.name === item.name) ? (
                   <Button onClick={removeFromFavs}>
                     {" "}
                     <Favorite

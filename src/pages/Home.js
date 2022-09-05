@@ -14,12 +14,10 @@ const Home = () => {
     setError(false);
     setIsLoading(true);
     axios
-      .get("https://rickandmortyapi.com/api/character")
+      .get("https://rickandmortyapi.com/api/character/?page=1")
       .then((response) => {
-        console.log("hello", characters);
-        const characters = response.results;
+        const characters = [...response.data.results];
         setCharacters([...characters]);
-        console.log("hello", characters);
       })
       .catch((error) => {
         setError(true);
@@ -32,7 +30,7 @@ const Home = () => {
   return (
     <div className="main">
       {error && <h3>Sorry an error happen when getting the data</h3>}
-      {/* {characters.length > 0 && (
+      {characters.length > 0 && (
         <>
           {characters.map((item) => (
             <Character
@@ -43,9 +41,9 @@ const Home = () => {
             />
           ))}
         </>
-      )} */}
+      )}
       {characters.map((item) => (
-        <p>item.name</p>
+        <p>{item.name}</p>
       ))}
     </div>
   );
