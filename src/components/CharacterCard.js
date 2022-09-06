@@ -4,13 +4,19 @@ import { Card } from "./Card";
 import CharInfo from "./CharInfo";
 import { Button, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
-
 import { useUserContext } from "../context/UserContext";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
-
-function Character({ item, openCharInf, setOpenCharInf }) {
+import addToFavs from "../service/add-remove-fav";
+import removeFav from "../service/add-remove-fav";
+function CharacterCard({
+  item,
+  openCharInf,
+  setOpenCharInf,
+  userFavs,
+  setUserFavs,
+}) {
   const navigate = useNavigate();
-  const userFavs = useUserContext();
+  // const userFavs = useUserContext();
   const [charInfo, setCharInfo] = useState({
     name: "",
     status: "",
@@ -61,7 +67,9 @@ function Character({ item, openCharInf, setOpenCharInf }) {
   }
   function addToFavs(event) {
     event.preventDefault();
-    userFavs.setFavChars([...userFavs.favChars, item]);
+    // userFavs.setFavChars([...userFavs.favChars, item]);
+    // console.log(userFavs.favChars);
+    setUserFavs([...userFavs, item]);
   }
 
   function removeFromFavs(event) {
@@ -117,7 +125,7 @@ function Character({ item, openCharInf, setOpenCharInf }) {
               </Button>
 
               <div>
-                {userFavs.favChars.some((x) => x.name === item.name) ? (
+                {userFavs.some((x) => x.name === item.name) ? (
                   <Button onClick={removeFromFavs}>
                     {" "}
                     <Favorite
@@ -141,4 +149,4 @@ function Character({ item, openCharInf, setOpenCharInf }) {
   );
 }
 
-export default Character;
+export default CharacterCard;

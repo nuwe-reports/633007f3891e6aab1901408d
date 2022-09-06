@@ -1,0 +1,62 @@
+@mixin navigation {
+  background-color: black;
+  color: white;
+}
+@mixin link() {
+  padding: 0.8rem;
+  font-weight: bold;
+}
+@mixin btnNoBtn {
+  border: none;
+  outline: none;
+}
+@mixin btngroup {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+
+  a {
+    margin: 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    &:visited {
+      color: white;
+    }
+    span {
+      padding-right: 0;
+      padding-left: 0.4rem;
+    }
+  }
+}
+
+// Small devices
+@mixin sm {
+  @media (min-width: #{$screen-sm-min}) {
+    @content;
+  }
+}
+
+// Medium devices
+@mixin md {
+  @media (min-width: #{$screen-md-min}) {
+    @content;
+  }
+}
+
+// Large devices
+@mixin lg {
+  @media (min-width: #{$screen-lg-min}) {
+    @content;
+  }
+}
+
+// Extra large devices
+@mixin xl {
+  @media (min-width: #{$screen-xl-min}) {
+    @content;
+  }
+}
