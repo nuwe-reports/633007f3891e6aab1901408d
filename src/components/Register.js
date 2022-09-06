@@ -1,7 +1,7 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
-
+import axios from "axios";
 import { useState } from "react";
 import faces from "../assets/faces.png";
 import IconButton from "@mui/material/IconButton";
@@ -36,6 +36,19 @@ const Register = ({
   //register func
   function registerUser(event) {
     event.preventDefault();
+    axios
+      .post("https://the-movieapp.herokuapp.com/auth/register", {
+        name: name,
+        email: email,
+        password: password,
+      })
+      .then(function (response) {
+        console.log(response);
+        console.log("hola");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   return (

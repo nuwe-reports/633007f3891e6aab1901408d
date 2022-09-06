@@ -24,6 +24,7 @@ const Form = () => {
   return (
     <Paper variant="outlined">
       <div className="form">
+        <p>{error}</p>
         <img
           src={faces}
           alt="Rick and Morty faces looking to each other"
