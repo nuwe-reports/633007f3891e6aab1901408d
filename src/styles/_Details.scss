@@ -1,0 +1,16 @@
+.det {
+  .details {
+    padding: 1rem;
+
+    .info {
+      padding: 1rem;
+      @include flex-col;
+    }
+    .img {
+      border: 1px solid white;
+    }
+  }
+}
+.btn {
+  padding-top: 20px;
+}

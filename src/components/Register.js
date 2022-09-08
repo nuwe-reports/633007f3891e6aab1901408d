@@ -137,8 +137,13 @@ const Register = ({
         {passwError !== "" && <p style={{ color: "#FE0D13" }}>{passwError}</p>}
       </FormControl>
 
-      <Button variant="contained" type="submit" onClick={registerUser}>
-        Register
+      <Button
+        variant="outlined"
+        color="inherit"
+        type="submit"
+        onClick={registerUser}
+      >
+        REGISTER
       </Button>
 
       <p>

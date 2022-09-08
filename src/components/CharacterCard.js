@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import Link from "@mui/material/Link";
 import { Card } from "./Card";
 import CharInfo from "./CharInfo";
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import { Favorite, FavoriteBorder } from "@mui/icons-material";
+import FavBtn from "./btns/FavBtn";
 
 function CharacterCard({
   item,
@@ -13,7 +13,7 @@ function CharacterCard({
   userFavs,
   setUserFavs,
 }) {
-  const [charInfo, setCharInfo] = useState({
+  const { empty } = useState({
     name: "",
     status: "",
     species: "",
@@ -21,14 +21,13 @@ function CharacterCard({
     origin: "",
     image: "",
   });
+  const [charInfo, setCharInfo] = useState({
+    ...empty,
+  });
+  const [favs, setFavs] = useState([]);
   function toggleInfo() {
     setCharInfo({
-      name: "",
-      status: "",
-      species: "",
-      gender: "",
-      origin: "",
-      image: "",
+      ...empty,
     });
     if (openCharInf.length < 1 || item.name !== openCharInf[0].name) {
       setCharInfo({
@@ -43,39 +42,13 @@ function CharacterCard({
     } else {
       setOpenCharInf([
         {
-          name: "",
-          status: "",
-          species: "",
-          gender: "",
-          origin: "",
-          image: "",
+          ...empty,
         },
       ]);
       setCharInfo({
-        name: "",
-        status: "",
-        species: "",
-        gender: "",
-        origin: "",
-        image: "",
+        ...empty,
       });
     }
-  }
-  function addToFavs(event) {
-    console.log(userFavs, "1");
-    setUserFavs([...userFavs, item]);
-    console.log(userFavs, "2");
-    const json = JSON.stringify(userFavs);
-    localStorage.setItem("favs", json);
-  }
-
-  function removeFromFavs(event) {
-    console.log(userFavs, "1");
-    setUserFavs([...userFavs.filter((i) => i.name !== item.name)]);
-    console.log(userFavs, "2");
-    const json = JSON.stringify(userFavs);
-    localStorage.setItem("favs", []);
-    localStorage.setItem("favs", json);
   }
 
   return (
@@ -83,34 +56,26 @@ function CharacterCard({
       {item.name === openCharInf[0].name ? (
         <Grid item xs="10" sm="9" md="6" lg="6" xl="6">
           <Card>
-            <div>
-              <Button onClick={toggleInfo}>
-                <div>
-                  <img src={item.image} alt={item.name} />
+            <div className="itemBig">
+              <div onClick={toggleInfo}>
+                <img src={item.image} alt={item.name} />
+              </div>
+              <div className="info">
+                <div onClick={toggleInfo}>
+                  <CharInfo item={item}></CharInfo>
                 </div>
-              </Button>
 
-              <div>
-                <CharInfo item={item}></CharInfo>
-                <div>
-                  {userFavs.some((x) => x.name === item.name) ? (
-                    <>
-                      <Button onClick={removeFromFavs}>
-                        <Favorite
-                          sx={{
-                            color: "#FE0D13",
-                          }}
-                        ></Favorite>
-                      </Button>
-                    </>
-                  ) : (
-                    <>
-                      <Button color="secondary" onClick={addToFavs}>
-                        <FavoriteBorder></FavoriteBorder>
-                      </Button>
-                    </>
-                  )}
-                </div>
+                <Typography>
+                  <Link
+                    underline="hover"
+                    color="inherit"
+                    href={`/chars/${item.id}`}
+                  >
+                    See complete info...
+                  </Link>
+                </Typography>
+
+                <FavBtn favs={favs} setFavs={setFavs} item={item}></FavBtn>
               </div>
             </div>
           </Card>
@@ -118,32 +83,12 @@ function CharacterCard({
       ) : (
         <Grid item xs="auto">
           <Card>
-            <div>
-              <Button onClick={toggleInfo}>
-                <div>
-                  <Typography>{item.name}</Typography>
-                  <img src={item.image} alt={item.name} />
-                </div>
-              </Button>
-
+            <div className="itemSmall" onClick={toggleInfo}>
               <div>
-                {userFavs.some((x) => x.name === item.name) ? (
-                  <Button onClick={removeFromFavs}>
-                    {" "}
-                    <Favorite
-                      sx={{
-                        color: "#FE0D13",
-                      }}
-                    ></Favorite>{" "}
-                  </Button>
-                ) : (
-                  <Button color="secondary" onClick={addToFavs}>
-                    {" "}
-                    <FavoriteBorder></FavoriteBorder>{" "}
-                  </Button>
-                )}{" "}
+                <img src={item.image} alt={item.name} />
               </div>
             </div>
+            <FavBtn favs={favs} setFavs={setFavs} item={item}></FavBtn>
           </Card>
         </Grid>
       )}

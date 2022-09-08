@@ -12,7 +12,7 @@ import {
 import Paper from "@mui/material/Paper";
 import { ThemeProvider } from "@emotion/react";
 import { useTheme } from "./context/ThemeContext";
-import UserFavs from "./pages/UserFavs";
+import Details from "./pages/Details";
 import RequireAuth from "./context/RequireAuth";
 import Footer from "./components/Footer";
 
@@ -35,13 +35,14 @@ function App() {
               }
             />
             <Route
-              path="/user"
+              path="/chars/:id"
               element={
                 <RequireAuth>
-                  <UserFavs />
+                  <Details />
                 </RequireAuth>
               }
             />
+
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer></Footer>

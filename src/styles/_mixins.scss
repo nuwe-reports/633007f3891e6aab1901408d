@@ -1,10 +1,19 @@
-@mixin navigation {
-  background-color: black;
-  color: white;
+@mixin char-img {
+  padding: auto;
+  margin: auto;
+  width: 200px;
+  height: auto;
 }
 @mixin link() {
   padding: 0.8rem;
   font-weight: bold;
+}
+
+@mixin flex-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 @mixin btnNoBtn {
   border: none;

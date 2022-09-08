@@ -60,6 +60,7 @@ const ResponsiveAppBar = ({ setOpenMessage, setMssg, mssg, openMessage }) => {
           >
             <img src={Logo} alt="Rick and Morty" width="200px"></img>
           </Typography>
+          {/* toggle dark theme  */}
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -90,14 +91,6 @@ const ResponsiveAppBar = ({ setOpenMessage, setMssg, mssg, openMessage }) => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              <>
-                <MenuItem key="Myfavs" onClick={handleCloseNavMenu}>
-                  <Link underline="none" color="inherit" href="/user">
-                    <Typography textAlign="center">♥️</Typography>
-                  </Link>
-                </MenuItem>
-              </>
-
               <MenuItem key="Login" onClick={handleCloseNavMenu}>
                 <Link underline="none" color="inherit">
                   <Typography textAlign="center">
@@ -125,7 +118,9 @@ const ResponsiveAppBar = ({ setOpenMessage, setMssg, mssg, openMessage }) => {
           >
             <img src={Logo} alt="Rick and Morty" width="200px"></img>
           </Typography>
-
+          <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
+            <ToggleThemeBTN></ToggleThemeBTN>
+          </Box>
           <Box
             sx={{
               flexGrow: 1,
@@ -133,28 +128,15 @@ const ResponsiveAppBar = ({ setOpenMessage, setMssg, mssg, openMessage }) => {
               justifyContent: "flex-end",
             }}
           >
-            <>
-              <Button
-                key="myFavs"
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "secondary.main", display: "block" }}
-                href="/user"
-              >
-                ♥️
-              </Button>
-            </>
-
+            <Box sx={{ flexGrow: 0, width: { xs: "10%", md: "5%" } }}>
+              <ToggleThemeBTN></ToggleThemeBTN>
+            </Box>
             <UserButton
               setOpenMessage={setOpenMessage}
               setMssg={setMssg}
               mssg={mssg}
               openMessage={openMessage}
             ></UserButton>
-          </Box>
-
-          {/* toggle dark theme  */}
-          <Box sx={{ flexGrow: 0, width: { xs: "10%", md: "5%" } }}>
-            <ToggleThemeBTN></ToggleThemeBTN>
           </Box>
         </Toolbar>
       </Container>

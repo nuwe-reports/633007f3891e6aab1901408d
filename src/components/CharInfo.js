@@ -1,15 +1,14 @@
+import { Typography } from "@mui/material";
+
 function CharInfo({ item }) {
   return (
     <>
-      <div>
-        <h2>{item.name}</h2>
-      </div>
-      <div>
-        <p>{item.genre}</p>
-      </div>
-      <div>
-        <p>{item.species}</p>
+      <div className="info">
+        <Typography variant="h5">{item.name}</Typography>
+
+        <div></div>
         <p>
+          👤 {item.species} <br />
           <i>{item.status}</i>
         </p>
       </div>

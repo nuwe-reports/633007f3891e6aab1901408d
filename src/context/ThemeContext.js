@@ -46,6 +46,9 @@ export const ToggleColorModeProv = ({ children }) => {
                   default: "#FFFFFF",
                   paper: "#ECE9E6",
                 },
+                text: {
+                  primary: "#4D4D4C",
+                },
               }
             : {
                 // palette values for dark mode
@@ -60,6 +63,9 @@ export const ToggleColorModeProv = ({ children }) => {
                 background: {
                   default: "#0f0c29",
                   paper: "#0f0c29",
+                },
+                text: {
+                  primary: "#ECE9E6",
                 },
               }),
         },
@@ -111,7 +117,7 @@ export const ToggleColorModeProv = ({ children }) => {
 
           MuiInputBase: {
             defaultProps: {
-              // disableUnderline: true,
+              disableUnderline: true,
             },
           },
           MuiOutlinedInput: {

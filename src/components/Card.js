@@ -2,9 +2,9 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 
 export const Card = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#150E10" : "#E8E8E8",
+  backgroundColor: theme.palette.mode === "dark" ? "#24213C" : "#FFFFFF",
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: "center",
-  color: theme.palette.text.secondary,
+  color: theme.palette.text.primary,
 }));

@@ -12,8 +12,8 @@ function Footer() {
             href="https://github.com/vivitt/Movie_APP#readme"
             target="blank"
           >
-            <GitHubIcon fontSize="small"></GitHubIcon>About MovieApp{" "}
-          </Link>{" "}
+            <GitHubIcon fontSize="small"></GitHubIcon>About Rick and Morty app
+          </Link>
         </p>
       </div>
       <div>

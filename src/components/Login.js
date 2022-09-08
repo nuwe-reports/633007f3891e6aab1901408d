@@ -115,8 +115,13 @@ const Login = ({
           label="password"
         />
       </FormControl>
-      <Button variant="contained" type="submit" onClick={loginUser}>
-        Login
+      <Button
+        variant="outlined"
+        color="inherit"
+        type="submit"
+        onClick={loginUser}
+      >
+        LOGIN
       </Button>
       <p>
         Not resgistered yet?...Please register{" "}
