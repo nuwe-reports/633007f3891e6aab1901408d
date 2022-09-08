@@ -4,10 +4,8 @@ import { Card } from "./Card";
 import CharInfo from "./CharInfo";
 import { Button, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import { useUserContext } from "../context/UserContext";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
-import addToFavs from "../service/add-remove-fav";
-import removeFav from "../service/add-remove-fav";
+
 function CharacterCard({
   item,
   openCharInf,
@@ -15,8 +13,6 @@ function CharacterCard({
   userFavs,
   setUserFavs,
 }) {
-  const navigate = useNavigate();
-  // const userFavs = useUserContext();
   const [charInfo, setCharInfo] = useState({
     name: "",
     status: "",
@@ -66,14 +62,20 @@ function CharacterCard({
     }
   }
   function addToFavs(event) {
-    event.preventDefault();
-    // userFavs.setFavChars([...userFavs.favChars, item]);
-    // console.log(userFavs.favChars);
+    console.log(userFavs, "1");
     setUserFavs([...userFavs, item]);
+    console.log(userFavs, "2");
+    const json = JSON.stringify(userFavs);
+    localStorage.setItem("favs", json);
   }
 
   function removeFromFavs(event) {
-    event.preventDefault();
+    console.log(userFavs, "1");
+    setUserFavs([...userFavs.filter((i) => i.name !== item.name)]);
+    console.log(userFavs, "2");
+    const json = JSON.stringify(userFavs);
+    localStorage.setItem("favs", []);
+    localStorage.setItem("favs", json);
   }
 
   return (
@@ -91,7 +93,7 @@ function CharacterCard({
               <div>
                 <CharInfo item={item}></CharInfo>
                 <div>
-                  {userFavs.favChars.some((x) => x.name === item.name) ? (
+                  {userFavs.some((x) => x.name === item.name) ? (
                     <>
                       <Button onClick={removeFromFavs}>
                         <Favorite

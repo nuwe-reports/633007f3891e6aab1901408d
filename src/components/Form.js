@@ -22,9 +22,9 @@ const Form = () => {
   //close dialog
 
   return (
-    <Paper variant="outlined">
+    <Paper variant="outlined" sx={{ backgroundColor: "primary.main" }}>
       <div className="form">
-        <p>{error}</p>
+        {error !== "" && <p style={{ color: "#FE0D13" }}>{error}</p>}
         <img
           src={faces}
           alt="Rick and Morty faces looking to each other"

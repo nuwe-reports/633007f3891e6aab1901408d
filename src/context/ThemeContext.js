@@ -111,7 +111,7 @@ export const ToggleColorModeProv = ({ children }) => {
 
           MuiInputBase: {
             defaultProps: {
-              disableUnderline: true,
+              // disableUnderline: true,
             },
           },
           MuiOutlinedInput: {

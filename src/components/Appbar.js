@@ -16,13 +16,13 @@ import Logo from "../assets/logo.png";
 
 import { NavLink } from "react-router-dom";
 import Link from "@mui/material/Link";
-import ToggleBTN from "./ToggleBTN";
-import UserButton from "./UserButton";
+import ToggleThemeBTN from "./btns/ToggleThemeBTN";
+import UserButton from "./btns/UserButton";
 
 const ResponsiveAppBar = ({ setOpenMessage, setMssg, mssg, openMessage }) => {
   const [anchorElNav, setAnchorElNav] = React.useState();
   const [anchorElUser, setAnchorElUser] = React.useState();
-
+  const email = localStorage.getItem("user");
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -47,7 +47,7 @@ const ResponsiveAppBar = ({ setOpenMessage, setMssg, mssg, openMessage }) => {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href={email !== "" ? "/chars" : "/"}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -112,7 +112,7 @@ const ResponsiveAppBar = ({ setOpenMessage, setMssg, mssg, openMessage }) => {
             variant="h5"
             noWrap
             component="a"
-            href="/"
+            href={email !== "" ? "/chars" : "/"}
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -154,7 +154,7 @@ const ResponsiveAppBar = ({ setOpenMessage, setMssg, mssg, openMessage }) => {
 
           {/* toggle dark theme  */}
           <Box sx={{ flexGrow: 0, width: { xs: "10%", md: "5%" } }}>
-            <ToggleBTN></ToggleBTN>
+            <ToggleThemeBTN></ToggleThemeBTN>
           </Box>
         </Toolbar>
       </Container>

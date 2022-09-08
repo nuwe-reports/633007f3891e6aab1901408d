@@ -44,10 +44,32 @@ const Register = ({
       })
       .then(function (response) {
         console.log(response);
-        console.log("hola");
+        if (response.status === 200) {
+          setShowRegister(false);
+        }
       })
       .catch(function (error) {
         console.log(error);
+        console.log("err");
+        if (error.response.status === 400) {
+          const errors = error.response.data.messages;
+          const fields = error.response.data.fields;
+          console.log("400");
+          if (fields.some((item) => item === "name"))
+            setNameError(errors[fields.indexOf("name")]);
+          console.log(nameError);
+          if (fields.some((item) => item === "email"))
+            setMailError(errors[fields.indexOf("email")]);
+
+          if (fields.some((item) => item === "password"))
+            setPasswError(errors[fields.indexOf("password")]);
+        } else if (error.response.status === 409) {
+          console.log("409");
+          setErrMssg(error.response.data.messages);
+        } else if (error.response.status === 500) {
+          console.log("500");
+          setErrMssg("An unexpected error happened, please try again.");
+        }
       });
   }
 
@@ -63,9 +85,11 @@ const Register = ({
           onChange={(event) => {
             setName(event.target.value);
             setError(false);
+            setNameError("");
           }}
           label="name"
         />
+        {nameError !== "" && <p style={{ color: "#FE0D13" }}>{nameError}</p>}
       </FormControl>
 
       <FormControl sx={{ m: 1 }} variant="outlined">
@@ -78,9 +102,11 @@ const Register = ({
           onChange={(event) => {
             setEmail(event.target.value);
             setError(false);
+            setMailError("");
           }}
           label="email"
         />
+        {mailError !== "" && <p style={{ color: "#FE0D13" }}>{mailError}</p>}
       </FormControl>
 
       <FormControl sx={{ m: 1 }} variant="outlined">
@@ -92,6 +118,7 @@ const Register = ({
           onChange={(event) => {
             setPassword(event.target.value);
             setError(false);
+            setPasswError("");
           }}
           endAdornment={
             <InputAdornment position="end">
@@ -107,6 +134,7 @@ const Register = ({
           }
           label="password"
         />
+        {passwError !== "" && <p style={{ color: "#FE0D13" }}>{passwError}</p>}
       </FormControl>
 
       <Button variant="contained" type="submit" onClick={registerUser}>

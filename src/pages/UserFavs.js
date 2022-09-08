@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
-
+import CharacterCard from "../components/CharacterCard";
 import FavCharCard from "../components/FavCharCard";
 const UserFavs = () => {
   const [favs, setFavs] = useState([]);
 
   useEffect(() => {
     const json = localStorage.getItem("favs");
-    const userFavs = JSON.parse(json);
-    if (userFavs) {
-      setFavs([...userFavs]);
+    const favs = JSON.parse(json);
+    if (favs) {
+      setFavs([...favs]);
     }
   }, []);
 

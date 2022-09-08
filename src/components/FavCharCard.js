@@ -4,17 +4,13 @@ import { Card } from "./Card";
 import CharInfo from "./CharInfo";
 import { Button, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import { useUserContext } from "../context/UserContext";
+
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 
 function FavCharCard({ item, favs, setFavs }) {
   const navigate = useNavigate();
 
-  function removeFromFavs(event) {
-    event.preventDefault();
-    setFavs([favs.filter((item) => item.id !== item.id)]);
-    console.log(favs);
-  }
+  function removeFromFavs(event) {}
   return (
     <>
       <Grid item xs="10" sm="9" md="6" lg="6" xl="6">

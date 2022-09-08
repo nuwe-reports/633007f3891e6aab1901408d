@@ -1,9 +1,9 @@
 import * as React from "react";
-
+import { useNavigate } from "react-router-dom";
 import Link from "@mui/material/Link";
 import Button from "@mui/material/Button";
 import { useState } from "react";
-
+import axios from "axios";
 import IconButton from "@mui/material/IconButton";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -23,38 +23,55 @@ const Login = ({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
   //login func
   function loginUser(event) {
-    // event.preventDefault();
-    // const requestOptions = {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ email: email, password: password }),
-    // };
-    // fetch("/auth/login", requestOptions)
-    //   .then((response) =>
-    //     response
-    //       .json()
-    //       .then((data) => {
-    //         onLogin({ email: data.email, name: data.name });
-    //         // navigate('/', {replace: true})
-    //         setEmail("");
-    //         setPassword("");
-    //         if (response.status === 200) {
-    //           setLogin(false);
-    //           setMssg(
-    //             `Hi ${
-    //               data.name.charAt(0).toUpperCase() + data.name.slice(1)
-    //             }, welcome to MovieApp :)`
-    //           );
-    //           setOpenMessage(true);
-    //         } else {
-    //           setError(data.message);
-    //         }
-    //       })
-    //   )
-    //   .catch((err) => console.log(err));
+    event.preventDefault();
+    axios
+      .post("https://the-movieapp.herokuapp.com/auth/login", {
+        email: email,
+        password: password,
+      })
+      .then(function (response) {
+        localStorage.setItem("user", response.data.email);
+        console.log(response);
+        console.log("logged in");
+        navigate("/chars", { replace: true });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
+
+  // event.preventDefault();
+  // const requestOptions = {
+  //   method: "POST",
+  //   headers: { "Content-Type": "application/json" },
+  //   body: JSON.stringify({ email: email, password: password }),
+  // };
+  // fetch("/auth/login", requestOptions)
+  //   .then((response) =>
+  //     response
+  //       .json()
+  //       .then((data) => {
+  //         onLogin({ email: data.email, name: data.name });
+  //         // navigate('/', {replace: true})
+  //         setEmail("");
+  //         setPassword("");
+  //         if (response.status === 200) {
+  //           setLogin(false);
+  //           setMssg(
+  //             `Hi ${
+  //               data.name.charAt(0).toUpperCase() + data.name.slice(1)
+  //             }, welcome to MovieApp :)`
+  //           );
+  //           setOpenMessage(true);
+  //         } else {
+  //           setError(data.message);
+  //         }
+  //       })
+  //   )
+  //   .catch((err) => console.log(err));
 
   return (
     <>

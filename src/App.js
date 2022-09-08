@@ -13,30 +13,41 @@ import Paper from "@mui/material/Paper";
 import { ThemeProvider } from "@emotion/react";
 import { useTheme } from "./context/ThemeContext";
 import UserFavs from "./pages/UserFavs";
-import UserContextProv from "./context/UserContext";
+import RequireAuth from "./context/RequireAuth";
 import Footer from "./components/Footer";
 
 function App() {
   const modeTheme = useTheme();
   return (
-    <ThemeProvider theme={modeTheme}>
-      <UserContextProv>
-        <Paper>
-          <Router>
-            <div className="App">
-              <Appbar />
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/chars" element={<Characters />} />
-                <Route path="/user" element={<UserFavs />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-              <Footer></Footer>
-            </div>
-          </Router>
-        </Paper>
-      </UserContextProv>
-    </ThemeProvider>
+    <Paper>
+      <Router>
+        <div className="App">
+          <Appbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+
+            <Route
+              path="/chars"
+              element={
+                <RequireAuth>
+                  <Characters />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/user"
+              element={
+                <RequireAuth>
+                  <UserFavs />
+                </RequireAuth>
+              }
+            />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <Footer></Footer>
+        </div>
+      </Router>
+    </Paper>
   );
 }
 

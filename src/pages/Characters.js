@@ -4,6 +4,8 @@ import axios from "axios";
 import CharacterCard from "../components/CharacterCard";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import Loader from "../components/Loader";
+
 const Characters = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -26,17 +28,17 @@ const Characters = () => {
       })
       .finally(() => {
         setIsLoading(false);
-        console.log("bye", characters);
       });
   }, []);
 
-  useEffect(() => {
-    const json = JSON.stringify(userFavs);
-    localStorage.setItem("favs", json);
-  }, [userFavs]);
+  // useEffect(() => {
+  //   const json = JSON.stringify(userFavs);
+  //   localStorage.setItem("favs", json);
+  // }, [userFavs]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
+      {isLoading && <Loader></Loader>}
       {error && <h3>Sorry an error happen when getting the data</h3>}
       {characters.length > 0 && (
         <Grid
