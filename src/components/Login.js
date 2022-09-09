@@ -115,14 +115,16 @@ const Login = ({
           label="password"
         />
       </FormControl>
-      <Button
-        variant="outlined"
-        color="inherit"
-        type="submit"
-        onClick={loginUser}
-      >
-        LOGIN
-      </Button>
+      <div className="btn">
+        <Button
+          variant="outlined"
+          color="inherit"
+          type="submit"
+          onClick={loginUser}
+        >
+          LOGIN
+        </Button>
+      </div>
       <p>
         Not resgistered yet?...Please register{" "}
         <Link

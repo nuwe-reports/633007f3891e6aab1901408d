@@ -19,19 +19,22 @@
     @include char-img;
   }
   display: flex;
-  flex-direction: row nowrap;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  max-height: 300px;
-  img {
-    @include char-img;
-  }
+
   .info {
-    @include flex-col;
+    @include flex-col-center;
     .link {
       @include link;
     }
     padding-right: 20px;
+  }
+  @include sm {
+    flex-direction: row;
+    flex-grow: no wrap;
+    justify-content: space-between;
+    align-items: center;
   }
   /* max-height: 400px; */
 }

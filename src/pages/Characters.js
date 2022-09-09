@@ -5,7 +5,7 @@ import CharacterCard from "../components/CharacterCard";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Loader from "../components/Loader";
-import Typography from "@mui/material/Typography";
+
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
@@ -19,7 +19,7 @@ const Characters = () => {
   const [openCharInf, setOpenCharInf] = useState([
     { name: "", status: "", species: "", gender: "", origin: "", image: "" },
   ]);
-
+  const [favs, setFavs] = useState([]);
   const [userFavs, setUserFavs] = useState([]);
   //pagination --------------------**********************
   const [page, setPage] = React.useState(1);
@@ -28,9 +28,12 @@ const Characters = () => {
   };
   //----------**********-------------**************-----------
   useEffect(() => {
-    const favs = localStorage.getItem("favs");
-    setUserFavs(...favs);
-  }, []);
+    const storedFavs = localStorage.getItem("favs");
+    const storedJSON = JSON.parse(storedFavs);
+    setUserFavs([...userFavs, ...storedJSON]);
+
+    console.log("*******", userFavs);
+  }, [favs]);
 
   useEffect(() => {
     setError(false);
@@ -68,7 +71,8 @@ const Characters = () => {
                 key={item.id}
                 item={item}
                 userFavs={userFavs}
-                setUserFavs={setUserFavs}
+                favs={favs}
+                setFavs={setFavs}
                 openCharInf={openCharInf}
                 setOpenCharInf={setOpenCharInf}
               />

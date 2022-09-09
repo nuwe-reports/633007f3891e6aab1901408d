@@ -11,7 +11,8 @@ function CharacterCard({
   openCharInf,
   setOpenCharInf,
   userFavs,
-  setUserFavs,
+  favs,
+  setFavs,
 }) {
   const { empty } = useState({
     name: "",
@@ -24,7 +25,7 @@ function CharacterCard({
   const [charInfo, setCharInfo] = useState({
     ...empty,
   });
-  const [favs, setFavs] = useState([]);
+
   function toggleInfo() {
     setCharInfo({
       ...empty,
@@ -75,7 +76,12 @@ function CharacterCard({
                   </Link>
                 </Typography>
 
-                <FavBtn favs={favs} setFavs={setFavs} item={item}></FavBtn>
+                <FavBtn
+                  userFavs={userFavs}
+                  favs={favs}
+                  setFavs={setFavs}
+                  item={item}
+                ></FavBtn>
               </div>
             </div>
           </Card>
@@ -88,7 +94,12 @@ function CharacterCard({
                 <img src={item.image} alt={item.name} />
               </div>
             </div>
-            <FavBtn favs={favs} setFavs={setFavs} item={item}></FavBtn>
+            <FavBtn
+              userFavs={userFavs}
+              favs={favs}
+              setFavs={setFavs}
+              item={item}
+            ></FavBtn>
           </Card>
         </Grid>
       )}

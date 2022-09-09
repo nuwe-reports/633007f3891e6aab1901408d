@@ -4,13 +4,10 @@
 
     .info {
       padding: 1rem;
-      @include flex-col;
+      @include flex-col-center;
     }
     .img {
       border: 1px solid white;
     }
   }
-}
-.btn {
-  padding-top: 20px;
 }

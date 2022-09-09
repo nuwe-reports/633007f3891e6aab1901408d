@@ -9,11 +9,17 @@
   font-weight: bold;
 }
 
-@mixin flex-col {
+@mixin flex-col-center {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+}
+@mixin flex-col-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 @mixin btnNoBtn {
   border: none;
