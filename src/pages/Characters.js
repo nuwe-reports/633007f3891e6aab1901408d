@@ -56,7 +56,7 @@ const Characters = () => {
     <div className="main">
       <Box sx={{ flexGrow: 1 }}>
         {isLoading && <Loader></Loader>}
-        {error && <h3>Sorry an error happen when getting the data</h3>}
+        {error && <h3>Sorry an error happen getting the data</h3>}
         {characters.length > 0 && (
           <Grid
             container

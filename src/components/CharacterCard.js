@@ -55,7 +55,7 @@ function CharacterCard({
   return (
     <>
       {item.name === openCharInf[0].name ? (
-        <Grid item xs="10" sm="9" md="6" lg="6" xl="6">
+        <Grid item xs="10" sm="8" md="6" lg="6" xl="6">
           <Card>
             <div className="itemBig">
               <div onClick={toggleInfo}>

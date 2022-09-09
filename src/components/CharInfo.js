@@ -4,7 +4,17 @@ function CharInfo({ item }) {
   return (
     <>
       <div className="info">
-        <Typography variant="h5">{item.name}</Typography>
+        {item.name.length > 12 ? (
+          <>
+            {item.name.length > 20 ? (
+              <Typography variant="h5">{item.name}</Typography>
+            ) : (
+              <Typography variant="h4">{item.name}</Typography>
+            )}
+          </>
+        ) : (
+          <Typography variant="h3">{item.name}</Typography>
+        )}
 
         <div></div>
         <p>
