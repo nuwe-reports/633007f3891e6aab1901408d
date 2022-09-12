@@ -73,7 +73,7 @@ const Register = ({
 
   return (
     <>
-      <FormControl variant="outlined">
+      <FormControl variant="outlined" sx={{ width: "200px" }}>
         <InputLabel htmlFor="name">Name</InputLabel>
         <OutlinedInput
           id="name"
@@ -92,7 +92,7 @@ const Register = ({
         {nameError !== "" && <p style={{ color: "#FE0D13" }}>{nameError}</p>}
       </FormControl>
 
-      <FormControl sx={{ m: 1 }} variant="outlined">
+      <FormControl sx={{ m: 1, width: "200px" }} variant="outlined">
         <InputLabel htmlFor="email">Email</InputLabel>
         <OutlinedInput
           id="email"
@@ -111,7 +111,7 @@ const Register = ({
         {mailError !== "" && <p style={{ color: "#FE0D13" }}>{mailError}</p>}
       </FormControl>
 
-      <FormControl sx={{ m: 1 }} variant="outlined">
+      <FormControl sx={{ m: 1, width: "200px" }} variant="outlined">
         <InputLabel htmlFor="password">Password</InputLabel>
         <OutlinedInput
           id="password"

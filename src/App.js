@@ -1,4 +1,5 @@
 import "./App.scss";
+import { useState, useEffect } from "react";
 import Appbar from "./components/Appbar";
 import Home from "./pages/Home";
 import Characters from "./pages/Characters";
@@ -18,6 +19,11 @@ import Footer from "./components/Footer";
 
 function App() {
   const modeTheme = useTheme();
+  // fav characters
+  const [favs, setFavs] = useState([]);
+
+  const [savedFavs, setSavedFavs] = useState([]);
+
   return (
     <Paper>
       <Router>
@@ -30,7 +36,12 @@ function App() {
               path="/chars"
               element={
                 <RequireAuth>
-                  <Characters />
+                  <Characters
+                    favs={favs}
+                    setFavs={setFavs}
+                    savedFavs={savedFavs}
+                    setSavedFavs={setSavedFavs}
+                  />
                 </RequireAuth>
               }
             />

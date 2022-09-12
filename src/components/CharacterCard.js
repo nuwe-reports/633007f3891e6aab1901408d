@@ -78,7 +78,6 @@ function CharacterCard({
                 </Typography>
 
                 <FavBtn
-                  userFavs={userFavs}
                   favs={favs}
                   setFavs={setFavs}
                   item={item}
@@ -97,7 +96,6 @@ function CharacterCard({
               </div>
             </div>
             <FavBtn
-              userFavs={userFavs}
               favs={favs}
               setFavs={setFavs}
               item={item}

@@ -6,11 +6,14 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Box from "@mui/material/Box";
 import { Card } from "../components/Card";
+import Loader from "../components/Loader";
 import BackBtn from "../components/btns/BackBtn";
+import { Favorite } from "@mui/icons-material";
 const Details = () => {
   const { id } = useParams();
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [favChars, setFavChars] = useState([]);
   const [char, setChar] = useState({
     id: 0,
     name: "",
@@ -36,7 +39,6 @@ const Details = () => {
       .then((response) => {
         const data = { ...response.data };
         setChar({ ...data });
-        console.log(char.episode);
       })
       .catch((error) => {
         setError(true);
@@ -46,15 +48,33 @@ const Details = () => {
       });
   }, []);
 
+  useEffect(() => {
+    const localFavs = localStorage.getItem("favs");
+    if (localFavs.length) {
+      const parsedFavs = JSON.parse(localFavs);
+      setFavChars([...parsedFavs]);
+    }
+  }, []);
+
   const getNum = (e) => e.split("/")[5];
 
   return (
     <div className="main">
+      {isLoading && <Loader></Loader>}
       <Box>
         <Card className="det">
           <div className="details">
             <div className="info">
-              <Typography variant="h3">{char.name}</Typography>
+              <Typography variant="h3">
+                {char.name}{" "}
+                {favChars.some((i) => i.id === char.id) && (
+                  <Favorite
+                    sx={{
+                      color: "#FE0D13",
+                    }}
+                  ></Favorite>
+                )}
+              </Typography>
             </div>
             <img src={char.image} alt={char.name}></img>
             <div className="info">

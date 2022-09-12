@@ -9,7 +9,7 @@ import Loader from "../components/Loader";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
-const Characters = () => {
+const Characters = ({ favs, setFavs, savedFavs, setSavedFavs }) => {
   //loader
   const [isLoading, setIsLoading] = useState(false);
   //error getting data
@@ -21,10 +21,6 @@ const Characters = () => {
     { name: "", status: "", species: "", gender: "", origin: "", image: "" },
   ]);
 
-  // user favs
-  const [favs, setFavs] = useState([]);
-  const [userFavs, setUserFavs] = useState([]);
-  const [savedFavs, setSavedFavs] = useState([]);
   //pagination --------------------**********************
   const [page, setPage] = React.useState(1);
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
@@ -55,7 +51,6 @@ const Characters = () => {
     if (favs.length) {
       const json = JSON.stringify(favs);
       localStorage.setItem("favs", json);
-      console.log("set local - favs", favs);
     }
   }, [favs]);
 
@@ -68,6 +63,7 @@ const Characters = () => {
       setSavedFavs([]);
     }
   }, [favs]);
+
   useEffect(() => {
     const localFavs = localStorage.getItem("favs");
     if (localFavs.length) {
@@ -95,7 +91,6 @@ const Characters = () => {
               <CharacterCard
                 key={item.id}
                 item={item}
-                userFavs={userFavs}
                 savedFavs={savedFavs}
                 favs={favs}
                 setFavs={setFavs}
