@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-
+import ThemeSwitch from "./Switch";
 import Button from "@mui/material/Button";
 
 import MenuItem from "@mui/material/MenuItem";
@@ -118,6 +118,7 @@ const ResponsiveAppBar = ({ setOpenMessage, setMssg, mssg, openMessage }) => {
           >
             <img src={Logo} alt="Rick and Morty" width="200px"></img>
           </Typography>
+
           <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
             <ToggleThemeBTN></ToggleThemeBTN>
           </Box>
@@ -131,12 +132,7 @@ const ResponsiveAppBar = ({ setOpenMessage, setMssg, mssg, openMessage }) => {
             <Box sx={{ flexGrow: 0, width: { xs: "10%", md: "5%" } }}>
               <ToggleThemeBTN></ToggleThemeBTN>
             </Box>
-            <UserButton
-              setOpenMessage={setOpenMessage}
-              setMssg={setMssg}
-              mssg={mssg}
-              openMessage={openMessage}
-            ></UserButton>
+            <UserButton></UserButton>
           </Box>
         </Toolbar>
       </Container>

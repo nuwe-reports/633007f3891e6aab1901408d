@@ -13,6 +13,7 @@ function CharacterCard({
   userFavs,
   favs,
   setFavs,
+  savedFavs,
 }) {
   const { empty } = useState({
     name: "",
@@ -25,7 +26,7 @@ function CharacterCard({
   const [charInfo, setCharInfo] = useState({
     ...empty,
   });
-
+  //open close char card
   function toggleInfo() {
     setCharInfo({
       ...empty,
@@ -81,6 +82,7 @@ function CharacterCard({
                   favs={favs}
                   setFavs={setFavs}
                   item={item}
+                  savedFavs={savedFavs}
                 ></FavBtn>
               </div>
             </div>
@@ -99,6 +101,7 @@ function CharacterCard({
               favs={favs}
               setFavs={setFavs}
               item={item}
+              savedFavs={savedFavs}
             ></FavBtn>
           </Card>
         </Grid>

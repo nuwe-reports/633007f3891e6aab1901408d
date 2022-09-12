@@ -4,8 +4,7 @@ import { useState, useEffect } from "react";
 import LogoutBtn from "./LogoutBtn";
 import SignupBtn from "./SignupBtn";
 
-function UserButton({ setOpenMessage, setMssg, mssg, openMessage }) {
-  const [open, setOpen] = React.useState(false);
+function UserButton() {
   //SHOW LOGIN-REGISTER
   const [user, setUser] = useState("");
   useEffect(() => {

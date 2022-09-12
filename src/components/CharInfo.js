@@ -4,7 +4,7 @@ function CharInfo({ item }) {
   return (
     <>
       <div className="info">
-        {item.name.length > 12 ? (
+        {item.name.length > 8 ? (
           <>
             {item.name.length > 20 ? (
               <Typography variant="h5">{item.name}</Typography>

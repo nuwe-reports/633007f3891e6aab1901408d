@@ -75,7 +75,7 @@ const Login = ({
 
   return (
     <>
-      <FormControl sx={{ m: 1 }} variant="outlined">
+      <FormControl variant="outlined">
         <InputLabel htmlFor="email">Email</InputLabel>
         <OutlinedInput
           id="email"
@@ -87,6 +87,7 @@ const Login = ({
             setError("");
           }}
           label="email"
+          placeholder="Email"
         />
       </FormControl>
 
@@ -113,6 +114,7 @@ const Login = ({
             </InputAdornment>
           }
           label="password"
+          placeholder="Password"
         />
       </FormControl>
       <div className="btn">

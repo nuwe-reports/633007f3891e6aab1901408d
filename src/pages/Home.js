@@ -3,6 +3,7 @@ import { useEffect } from "react";
 const Home = () => {
   useEffect(() => {
     localStorage.setItem("user", "");
+    localStorage.setItem("favs", "");
   }, []);
 
   return (

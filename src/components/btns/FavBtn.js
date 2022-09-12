@@ -1,28 +1,22 @@
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { Button } from "@mui/material";
 
-const FavBtn = ({ userFavs, favs, setFavs, item }) => {
-  function addToFavs(e) {
-    e.preventDefault();
+const FavBtn = ({ savedFavs, favs, setFavs, item }) => {
+  function addToFavs() {
     setFavs([...favs, item]);
-
-    console.log("user", userFavs);
-    const json = JSON.stringify(favs);
-    localStorage.setItem("favs", json);
+    // const json = JSON.stringify(favs);
+    // localStorage.setItem("favs", json);
   }
 
-  function removeFromFavs(e) {
-    e.preventDefault();
-    setFavs([...favs.filter((i) => i.name !== item.name)]);
-
-    const json = JSON.stringify(favs);
-
-    localStorage.setItem("favs", json);
+  function removeFromFavs() {
+    setFavs([...favs.filter((fav) => fav.name !== item.name)]);
+    // const json = JSON.stringify(favs);
+    // localStorage.setItem("favs", json);
   }
 
   return (
     <div>
-      {userFavs.some((x) => x.id === item.id) ? (
+      {savedFavs.some((x) => x.id === item.id) ? (
         <Button onClick={removeFromFavs}>
           <Favorite
             sx={{

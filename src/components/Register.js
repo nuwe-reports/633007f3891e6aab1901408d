@@ -15,6 +15,8 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 const Register = ({
   error,
   setError,
+  errMssg,
+  setErrMssg,
   handleShowPass,
   setShowRegister,
   showPassword,
@@ -25,7 +27,7 @@ const Register = ({
   const [password, setPassword] = useState("");
   //ERRR
   // const [error, setError] = useState(false);
-  const [errMssg, setErrMssg] = useState(null);
+  // const [errMssg, setErrMssg] = useState(null);
   const errFields = ["name", "email", "password"];
 
   //errors
@@ -49,25 +51,21 @@ const Register = ({
         }
       })
       .catch(function (error) {
-        console.log(error);
-        console.log("err");
         if (error.response.status === 400) {
           const errors = error.response.data.messages;
           const fields = error.response.data.fields;
-          console.log("400");
+
           if (fields.some((item) => item === "name"))
             setNameError(errors[fields.indexOf("name")]);
-          console.log(nameError);
+
           if (fields.some((item) => item === "email"))
             setMailError(errors[fields.indexOf("email")]);
 
           if (fields.some((item) => item === "password"))
             setPasswError(errors[fields.indexOf("password")]);
         } else if (error.response.status === 409) {
-          console.log("409");
           setErrMssg(error.response.data.messages);
         } else if (error.response.status === 500) {
-          console.log("500");
           setErrMssg("An unexpected error happened, please try again.");
         }
       });
@@ -75,7 +73,7 @@ const Register = ({
 
   return (
     <>
-      <FormControl sx={{ m: 1 }} variant="outlined">
+      <FormControl variant="outlined">
         <InputLabel htmlFor="name">Name</InputLabel>
         <OutlinedInput
           id="name"
@@ -86,8 +84,10 @@ const Register = ({
             setName(event.target.value);
             setError(false);
             setNameError("");
+            setErrMssg("");
           }}
           label="name"
+          placeholder="Name"
         />
         {nameError !== "" && <p style={{ color: "#FE0D13" }}>{nameError}</p>}
       </FormControl>
@@ -103,8 +103,10 @@ const Register = ({
             setEmail(event.target.value);
             setError(false);
             setMailError("");
+            setErrMssg("");
           }}
           label="email"
+          placeholder="Email"
         />
         {mailError !== "" && <p style={{ color: "#FE0D13" }}>{mailError}</p>}
       </FormControl>
@@ -119,6 +121,7 @@ const Register = ({
             setPassword(event.target.value);
             setError(false);
             setPasswError("");
+            setErrMssg("");
           }}
           endAdornment={
             <InputAdornment position="end">
@@ -133,6 +136,7 @@ const Register = ({
             </InputAdornment>
           }
           label="password"
+          placeholder="Password"
         />
         {passwError !== "" && <p style={{ color: "#FE0D13" }}>{passwError}</p>}
       </FormControl>
