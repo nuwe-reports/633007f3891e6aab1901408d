@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# RICK and MORTY APP
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An app to navigate trough the characters from this TV show, get the basic info and select your favorite ones.
 
-## Available Scripts
+This project is the Talent Squad's frontend challenge driven by Barcelona Digital Talent.
 
-In the project directory, you can run:
+## Badges
 
-### `npm start`
+On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Visuals
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
 
-### `npm test`
+## API/Component
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This app consumes data from [The Rick and Morty API](https://rickandmortyapi.com/)
 
-### `npm run build`
+#### Page structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Home '/'
+- characters '/chars'
+- Details '/chars/:id'
+- 404 Not found
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    # Clone or install commands
+    npm i [project] o npm/yarn i
+    # test o run commands
+    npm start
+    npm run dev ...
 
-### `npm run eject`
+## Stack
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+This app was made with **React** and **MUI**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Third party libraries used:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Stack tecnológico utilizado y porqué y si se quire reconocimientos a librerias u otros proyectos base del que se parte.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Roadmap and visuals | Not using the common-readme | Not required
+Explicación extra, imágenes, wireframes, mockups, GIFs, etc.
 
-## Learn More
+Contribución y Apoyo | Not using the common-readme | Not required
+Puedes comentar el proceso de que tiene que hacer una persona si quiere colaborar o apoyar el proyecto.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Contact info | Not using the common-readme | Not required | Recommended
+Pon tu información básica de contacto
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Reconocimientos | Not using the common-readme | Not required
+Aquí puedes poner información extra sobre las librerias, documentación o proyectos que has utilizado para crear tu proyecto y perason u organizaciones que lo han apoyado
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+License
+Inlcuir la licéncia y el link a esta MIT
