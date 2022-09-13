@@ -46,14 +46,14 @@ const Characters = ({ favs, setFavs, savedFavs, setSavedFavs }) => {
         setIsLoading(false);
       });
   }, [page]);
-
+  // set favs in local storage
   useEffect(() => {
     if (favs.length) {
       const json = JSON.stringify(favs);
       localStorage.setItem("favs", json);
     }
   }, [favs]);
-
+  //  get favs from local storage
   useEffect(() => {
     if (favs.length) {
       const localFavs = localStorage.getItem("favs");
@@ -64,6 +64,7 @@ const Characters = ({ favs, setFavs, savedFavs, setSavedFavs }) => {
     }
   }, [favs]);
 
+  // get favs on page load
   useEffect(() => {
     const localFavs = localStorage.getItem("favs");
     if (localFavs.length) {

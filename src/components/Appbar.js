@@ -7,19 +7,14 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import ThemeSwitch from "./Switch";
-import Button from "@mui/material/Button";
-
-import MenuItem from "@mui/material/MenuItem";
 
 import Logo from "../assets/logo.png";
 
-import { NavLink } from "react-router-dom";
-import Link from "@mui/material/Link";
 import ToggleThemeBTN from "./btns/ToggleThemeBTN";
-import UserButton from "./btns/UserButton";
 
-const ResponsiveAppBar = ({ setOpenMessage, setMssg, mssg, openMessage }) => {
+import LogoutBtn from "./btns/LogoutBtn";
+
+const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState();
   const [anchorElUser, setAnchorElUser] = React.useState();
   const email = localStorage.getItem("user");
@@ -39,7 +34,7 @@ const ResponsiveAppBar = ({ setOpenMessage, setMssg, mssg, openMessage }) => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" data-testid="app-bar">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* -- navbar large */}
@@ -50,7 +45,7 @@ const ResponsiveAppBar = ({ setOpenMessage, setMssg, mssg, openMessage }) => {
             href={email !== "" ? "/chars" : "/"}
             sx={{
               mr: 2,
-              display: { xs: "none", md: "flex" },
+              display: { xs: "flex" },
               fontSize: "2rem",
               fontWeight: 700,
               letterSpacing: ".3rem",
@@ -58,11 +53,22 @@ const ResponsiveAppBar = ({ setOpenMessage, setMssg, mssg, openMessage }) => {
               textDecoration: "none",
             }}
           >
-            <img src={Logo} alt="Rick and Morty" width="200px"></img>
+            <img
+              src={Logo}
+              data-testid="logo-img"
+              alt="Rick and Morty"
+              width="200px"
+            ></img>
           </Typography>
           {/* toggle dark theme  */}
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "flex", md: "none" },
+              justifyContent: "flex-end",
+            }}
+          >
             <IconButton
               size="large"
               aria-label="menu"
@@ -91,37 +97,19 @@ const ResponsiveAppBar = ({ setOpenMessage, setMssg, mssg, openMessage }) => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              <MenuItem key="Login" onClick={handleCloseNavMenu}>
-                <Link underline="none" color="inherit">
-                  <Typography textAlign="center">
-                    <UserButton />
-                  </Typography>
-                </Link>
-              </MenuItem>
+              <ToggleThemeBTN
+                onClick={handleCloseNavMenu}
+                data-testid="toggle-btn"
+              ></ToggleThemeBTN>
+
+              {email !== "" && (
+                <Typography textAlign="center">
+                  <LogoutBtn onClick={handleCloseNavMenu} />
+                </Typography>
+              )}
             </Menu>
           </Box>
 
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href={email !== "" ? "/chars" : "/"}
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 2,
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            <img src={Logo} alt="Rick and Morty" width="200px"></img>
-          </Typography>
-
-          <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
-            <ToggleThemeBTN></ToggleThemeBTN>
-          </Box>
           <Box
             sx={{
               flexGrow: 1,
@@ -130,9 +118,9 @@ const ResponsiveAppBar = ({ setOpenMessage, setMssg, mssg, openMessage }) => {
             }}
           >
             <Box sx={{ flexGrow: 0, width: { xs: "10%", md: "5%" } }}>
-              <ToggleThemeBTN></ToggleThemeBTN>
+              <ToggleThemeBTN data-testid="toggle-btn"></ToggleThemeBTN>
             </Box>
-            <UserButton></UserButton>
+            {email !== "" && <LogoutBtn />}
           </Box>
         </Toolbar>
       </Container>

@@ -9,7 +9,7 @@ function Footer() {
         <p>
           <Link
             color="secondary"
-            href="https://github.com/vivitt/Movie_APP#readme"
+            href="https://github.com/vivitt/rick_morty_app"
             target="blank"
           >
             <GitHubIcon fontSize="small"></GitHubIcon>About Rick and Morty app

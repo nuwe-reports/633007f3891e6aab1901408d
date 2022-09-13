@@ -34,12 +34,11 @@ const Login = ({
       })
       .then(function (response) {
         localStorage.setItem("user", response.data.email);
-        console.log(response);
-        console.log("logged in");
+
         navigate("/chars", { replace: true });
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch(function (err) {
+        setError(err.response.data.message);
       });
   }
 

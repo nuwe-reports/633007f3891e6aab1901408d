@@ -1,5 +1,6 @@
 import Form from "../components/Form";
 import { useEffect } from "react";
+
 const Home = () => {
   useEffect(() => {
     localStorage.setItem("user", "");
@@ -7,7 +8,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="main">
+    <div className="main" data-testid="app">
       <Form></Form>
     </div>
   );

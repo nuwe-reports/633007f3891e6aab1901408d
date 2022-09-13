@@ -8,7 +8,12 @@ const BackBtn = () => {
     navigate("/chars");
   };
   return (
-    <Button variant="outlined" onClick={back} color="inherit">
+    <Button
+      variant="outlined"
+      onClick={back}
+      color="inherit"
+      data-testid="back-btn"
+    >
       <ArrowBackIosIcon></ArrowBackIosIcon>
       Back
     </Button>

@@ -27,8 +27,9 @@ const LogoutBtn = () => {
         e.preventDefault();
         logout();
       }}
+      data-testid="logout"
     >
-      Logout <LogoutIcon></LogoutIcon>
+      <LogoutIcon></LogoutIcon>
     </Button>
   );
 };

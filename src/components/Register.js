@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import axios from "axios";
 import { useState } from "react";
-import faces from "../assets/faces.png";
+
 import IconButton from "@mui/material/IconButton";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -25,9 +25,8 @@ const Register = ({
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //ERRR
-  // const [error, setError] = useState(false);
-  // const [errMssg, setErrMssg] = useState(null);
+
+  //ERRR fields
   const errFields = ["name", "email", "password"];
 
   //errors
@@ -45,7 +44,6 @@ const Register = ({
         password: password,
       })
       .then(function (response) {
-        console.log(response);
         if (response.status === 200) {
           setShowRegister(false);
         }
@@ -128,7 +126,6 @@ const Register = ({
               <IconButton
                 aria-label="toggle password visibility"
                 onClick={handleShowPass}
-                // onMouseDown={handleMouseDownPassword}
                 edge="end"
               >
                 {showPassword ? <VisibilityOff /> : <Visibility />}

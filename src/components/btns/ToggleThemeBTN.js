@@ -1,7 +1,6 @@
 import * as React from "react";
 import IconButton from "@mui/material/IconButton";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
+
 import { useTheme } from "../../context/ThemeContext";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
@@ -18,7 +17,11 @@ export default function ToggleThemeBTN() {
         onClick={colorMode.colorMode.toggleColorMode}
         color="secondary"
       >
-        {colorMode.mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
+        {colorMode.mode === "light" ? (
+          <DarkModeIcon data-testid="dark-mode" />
+        ) : (
+          <LightModeIcon data-testid="light-mode" />
+        )}
       </IconButton>
     </>
   );

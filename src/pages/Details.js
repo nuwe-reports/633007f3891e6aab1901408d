@@ -9,6 +9,7 @@ import { Card } from "../components/Card";
 import Loader from "../components/Loader";
 import BackBtn from "../components/btns/BackBtn";
 import { Favorite } from "@mui/icons-material";
+
 const Details = () => {
   const { id } = useParams();
   const [error, setError] = useState(false);

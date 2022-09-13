@@ -16,7 +16,6 @@ function CharInfo({ item }) {
           <Typography variant="h3">{item.name}</Typography>
         )}
 
-        <div></div>
         <p>
           👤 {item.species} <br />
           <i>{item.status}</i>

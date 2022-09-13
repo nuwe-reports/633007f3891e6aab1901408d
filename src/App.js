@@ -1,24 +1,17 @@
 import "./App.scss";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Appbar from "./components/Appbar";
 import Home from "./pages/Home";
 import Characters from "./pages/Characters";
 import NotFound from "./pages/NotFound";
-import {
-  BrowserRouter as Router,
-  NavLink,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Paper from "@mui/material/Paper";
-import { ThemeProvider } from "@emotion/react";
-import { useTheme } from "./context/ThemeContext";
+
 import Details from "./pages/Details";
 import RequireAuth from "./context/RequireAuth";
 import Footer from "./components/Footer";
 
 function App() {
-  const modeTheme = useTheme();
   // fav characters
   const [favs, setFavs] = useState([]);
 
@@ -27,7 +20,7 @@ function App() {
   return (
     <Paper>
       <Router>
-        <div className="App">
+        <div className="app">
           <Appbar />
           <Routes>
             <Route path="/" element={<Home />} />
