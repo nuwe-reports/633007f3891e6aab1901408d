@@ -20,30 +20,31 @@ Uses [The Movie App](https://github.com/vivitt/Movie_APP) as API for user regist
 
 #### Page structure
 
-- Home '/'
+##### Home '/'
 
-* register new user
-* login registered user
+- register new user
+- login registered user
 
-- characters '/chars'
+##### characters '/chars'
 
-* get the characters from https://rickandmortyapi.com/api/character/?page=1
-* paginate the results
-* show a small view of each character
-* show a big view of clicked character with a link to the Details page
+- get the characters from https://rickandmortyapi.com/api/character/?page=1
+- paginate the results
+- show a small view of each character
+- show a big view of clicked character with a link to the Details page
 
-- Details '/chars/:id'
+##### Details '/chars/:id'
 
-* get the one character info from https://rickandmortyapi.com/api/character/:id
-* show character's details
+- get the one character info from https://rickandmortyapi.com/api/character/:id
+- show character's details
 
-- 404 Not found '/anything-else'
+##### 404 Not found '/anything-else'
 
-* render a 404 page to mismatched urls
+- render a 404 page to mismatched urls
 
 ## Installation
 
 npm i
+
 npm start
 
 ## Stack
