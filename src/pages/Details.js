@@ -9,7 +9,7 @@ import { Card } from "../components/Card";
 import Loader from "../components/Loader";
 import BackBtn from "../components/btns/BackBtn";
 import { Favorite } from "@mui/icons-material";
-
+import { speciesIcon, statusIcon } from "../service/customCharInfo";
 const Details = () => {
   const { id } = useParams();
   const [error, setError] = useState(false);
@@ -32,6 +32,11 @@ const Details = () => {
     image: "",
     episode: [],
   });
+  const [firstSeen, setFirstSeen] = useState("");
+  const [lastSeen, setLastSeen] = useState("");
+  const [episodesNums, setEpisodesNum] = useState([]);
+  const getNum = (e) => e.split("/")[5];
+
   useEffect(() => {
     setError(false);
     setIsLoading(true);
@@ -41,6 +46,7 @@ const Details = () => {
         const data = { ...response.data };
         setChar({ ...data });
       })
+
       .catch((error) => {
         setError(true);
       })
@@ -50,14 +56,28 @@ const Details = () => {
   }, []);
 
   useEffect(() => {
+    setEpisodesNum(char.episode.map((e) => getNum(e)));
+  }, [char]);
+
+  useEffect(() => {
+    axios
+      .get(`https://rickandmortyapi.com/api/episode/${episodesNums[0]}`)
+      .then((response) => {
+        const data = { ...response.data };
+        setFirstSeen(data.name);
+      })
+
+      .catch((error) => {
+        setFirstSeen("Unknown");
+      });
+  }, [char]);
+  useEffect(() => {
     const localFavs = localStorage.getItem("favs");
     if (localFavs.length) {
       const parsedFavs = JSON.parse(localFavs);
       setFavChars([...parsedFavs]);
     }
   }, []);
-
-  const getNum = (e) => e.split("/")[5];
 
   return (
     <div className="main">
@@ -80,22 +100,29 @@ const Details = () => {
             <img src={char.image} alt={char.name}></img>
             <div className="info">
               <Typography variant="h5">
-                👤 {char.species}, {char.gender}
+                {speciesIcon(char.species)}, {char.gender}
               </Typography>
-              <Typography>
-                <i>{char.status}</i>
+              <Typography variant="h6">
+                <i>{statusIcon(char.status)}</i>
               </Typography>
             </div>
-
-            <Typography>
-              🛸 Comes from <i>{char.origin.name}</i>
-            </Typography>
+            <div>
+              <Typography variant="h6">
+                🛸 Comes from <i>{char.origin.name}</i>
+              </Typography>
+            </div>
             <div className="info">
-              <Typography variant="h5">🎬 Episodes: </Typography>
+              <Typography variant="h6">🎬 First seen at:</Typography>{" "}
+              <Chip
+                label={`${episodesNums[0]}. ${firstSeen}`}
+                sx={{ margin: "2px" }}
+              />
+              <Typography>🎬 Seen also at episodes: </Typography>
               <Box sx={{ maxWidth: "80%" }}>
-                {char.episode.map((e) => (
+                {episodesNums.map((e) => (
                   <Chip
-                    label={getNum(e)}
+                    size="small"
+                    label={e}
                     variant="outlined"
                     sx={{ margin: "2px" }}
                   />
