@@ -14,42 +14,42 @@ Depending on what you are making, it can be a good idea to include screenshots o
 
 ## API/Component
 
-This app consumes data from [The Rick and Morty API](https://rickandmortyapi.com/)
+This app get the data from the [The Rick and Morty API](https://rickandmortyapi.com/)
+
+Uses [The Movie App](https://github.com/vivitt/Movie_APP) as API for user registration and login
 
 #### Page structure
 
 - Home '/'
+
+* register new user
+* login registered user
+
 - characters '/chars'
+
+* get the characters from https://rickandmortyapi.com/api/character/?page=1
+* paginate the results
+* show a small view of each character
+* show a big view of clicked character with a link to the Details page
+
 - Details '/chars/:id'
-- 404 Not found
+
+* get the one character info from https://rickandmortyapi.com/api/character/:id
+* show character's details
+
+- 404 Not found '/anything-else'
+
+* render a 404 page to mismatched urls
 
 ## Installation
 
-    # Clone or install commands
-    npm i [project] o npm/yarn i
-    # test o run commands
-    npm start
-    npm run dev ...
+npm i
+npm start
 
 ## Stack
 
 This app was made with **React** and **MUI**
 
-Third party libraries used:
+**Axios** on the data request
 
-Stack tecnológico utilizado y porqué y si se quire reconocimientos a librerias u otros proyectos base del que se parte.
-
-Roadmap and visuals | Not using the common-readme | Not required
-Explicación extra, imágenes, wireframes, mockups, GIFs, etc.
-
-Contribución y Apoyo | Not using the common-readme | Not required
-Puedes comentar el proceso de que tiene que hacer una persona si quiere colaborar o apoyar el proyecto.
-
-Contact info | Not using the common-readme | Not required | Recommended
-Pon tu información básica de contacto
-
-Reconocimientos | Not using the common-readme | Not required
-Aquí puedes poner información extra sobre las librerias, documentación o proyectos que has utilizado para crear tu proyecto y perason u organizaciones que lo han apoyado
-
-License
-Inlcuir la licéncia y el link a esta MIT
+**SASS** to write the styles needed

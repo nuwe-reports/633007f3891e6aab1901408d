@@ -13,7 +13,7 @@ export default function PaginationBtns({ pageNum, setPageNum }) {
     <Stack spacing={2}>
       <Typography>Page: {page}</Typography>
       <Typography>Page num: {pageNum}</Typography>
-      <Pagination count={10} page={page} onChange={handleChange} />
+      <Pagination count={10} page={page} onChange={handleChange} size="large" />
     </Stack>
   );
 }

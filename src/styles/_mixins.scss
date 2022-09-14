@@ -3,11 +3,10 @@
   margin: auto;
   width: 200px;
   height: auto;
-  border-radius: 10px;
+  border-radius: 5px;
 }
-@mixin link() {
-  padding: 0.8rem;
-  font-weight: bold;
+@mixin link {
+  font-size: 0.7rem;
 }
 
 @mixin flex-col-center {

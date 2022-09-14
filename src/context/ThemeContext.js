@@ -106,14 +106,6 @@ export const ToggleColorModeProv = ({ children }) => {
               },
             },
           },
-          MuiSelect: {
-            styleOverrides: {
-              select: {
-                padding: 1,
-                margin: 3,
-              },
-            },
-          },
 
           MuiInputBase: {
             defaultProps: {
@@ -131,10 +123,7 @@ export const ToggleColorModeProv = ({ children }) => {
             styleOverrides: {
               elevation0: {
                 width: "100%",
-                // flexDirection: 'cloumn',
-                // justifyContent: 'center',
-                // alignItems: 'center',
-                // marginBottom: 0,
+
                 textAlign: "center",
                 marginTop: "2rem",
                 padding: "3rem",

@@ -8,7 +8,6 @@ import { Paper } from "@mui/material";
 
 const Form = () => {
   ////  password visibility icon
-
   const [showPassword, setShowPassword] = useState();
   const handleShowPass = (e) => {
     e.preventDefault();
@@ -17,6 +16,7 @@ const Form = () => {
 
   // show register or login form
   const [showRegister, setShowRegister] = useState(true);
+
   //error msg
   const [error, setError] = useState("");
   const [errMssg, setErrMssg] = useState("");
@@ -31,6 +31,7 @@ const Form = () => {
           src={rickAndMorty}
           alt="Rick holding Morty's eyes opened"
           width="300px"
+          data-testid="rick-and-morty-img"
         ></img>
         {showRegister ? (
           <Register

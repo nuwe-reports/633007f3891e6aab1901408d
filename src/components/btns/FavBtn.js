@@ -4,14 +4,10 @@ import { Button } from "@mui/material";
 const FavBtn = ({ savedFavs, favs, setFavs, item }) => {
   function addToFavs() {
     setFavs([...favs, item]);
-    // const json = JSON.stringify(favs);
-    // localStorage.setItem("favs", json);
   }
 
   function removeFromFavs() {
     setFavs([...favs.filter((fav) => fav.name !== item.name)]);
-    // const json = JSON.stringify(favs);
-    // localStorage.setItem("favs", json);
   }
 
   return (

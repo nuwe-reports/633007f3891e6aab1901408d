@@ -34,48 +34,17 @@ const Login = ({
       })
       .then(function (response) {
         localStorage.setItem("user", response.data.email);
-        console.log(response);
-        console.log("logged in");
+
         navigate("/chars", { replace: true });
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch(function (err) {
+        setError(err.response.data.message);
       });
   }
 
-  // event.preventDefault();
-  // const requestOptions = {
-  //   method: "POST",
-  //   headers: { "Content-Type": "application/json" },
-  //   body: JSON.stringify({ email: email, password: password }),
-  // };
-  // fetch("/auth/login", requestOptions)
-  //   .then((response) =>
-  //     response
-  //       .json()
-  //       .then((data) => {
-  //         onLogin({ email: data.email, name: data.name });
-  //         // navigate('/', {replace: true})
-  //         setEmail("");
-  //         setPassword("");
-  //         if (response.status === 200) {
-  //           setLogin(false);
-  //           setMssg(
-  //             `Hi ${
-  //               data.name.charAt(0).toUpperCase() + data.name.slice(1)
-  //             }, welcome to MovieApp :)`
-  //           );
-  //           setOpenMessage(true);
-  //         } else {
-  //           setError(data.message);
-  //         }
-  //       })
-  //   )
-  //   .catch((err) => console.log(err));
-
   return (
     <>
-      <FormControl variant="outlined">
+      <FormControl sx={{ width: "200px" }} variant="outlined">
         <InputLabel htmlFor="email">Email</InputLabel>
         <OutlinedInput
           id="email"
@@ -91,7 +60,7 @@ const Login = ({
         />
       </FormControl>
 
-      <FormControl sx={{ m: 1 }} variant="outlined">
+      <FormControl sx={{ m: 1, width: "200px" }} variant="outlined">
         <InputLabel htmlFor="password">Password</InputLabel>
         <OutlinedInput
           id="password"

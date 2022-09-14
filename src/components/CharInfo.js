@@ -1,25 +1,17 @@
 import { Typography } from "@mui/material";
-
+import { nameSize, speciesIcon, statusIcon } from "../service/customCharInfo";
 function CharInfo({ item }) {
   return (
     <>
       <div className="info">
-        {item.name.length > 8 ? (
-          <>
-            {item.name.length > 20 ? (
-              <Typography variant="h5">{item.name}</Typography>
-            ) : (
-              <Typography variant="h4">{item.name}</Typography>
-            )}
-          </>
-        ) : (
-          <Typography variant="h3">{item.name}</Typography>
-        )}
+        <Typography variant={nameSize(item.name)}>
+          <b>{item.name}</b>
+        </Typography>
 
-        <div></div>
         <p>
-          👤 {item.species} <br />
-          <i>{item.status}</i>
+          {speciesIcon(item.species)}
+          <br />
+          {statusIcon(item.status)}
         </p>
       </div>
     </>

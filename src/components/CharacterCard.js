@@ -60,13 +60,23 @@ function CharacterCard({
           <Card>
             <div className="itemBig">
               <div onClick={toggleInfo}>
-                <img src={item.image} alt={item.name} />
+                <img
+                  data-testid="img-item-big"
+                  src={item.image}
+                  alt={item.name}
+                />
               </div>
-              <div className="info">
+              <div className="info info-big">
                 <div onClick={toggleInfo}>
                   <CharInfo item={item}></CharInfo>
                 </div>
 
+                <FavBtn
+                  favs={favs}
+                  setFavs={setFavs}
+                  item={item}
+                  savedFavs={savedFavs}
+                ></FavBtn>
                 <Typography>
                   <Link
                     underline="hover"
@@ -76,14 +86,6 @@ function CharacterCard({
                     See complete info...
                   </Link>
                 </Typography>
-
-                <FavBtn
-                  userFavs={userFavs}
-                  favs={favs}
-                  setFavs={setFavs}
-                  item={item}
-                  savedFavs={savedFavs}
-                ></FavBtn>
               </div>
             </div>
           </Card>
@@ -93,11 +95,14 @@ function CharacterCard({
           <Card>
             <div className="itemSmall" onClick={toggleInfo}>
               <div>
-                <img src={item.image} alt={item.name} />
+                <img
+                  data-testid="img-item-small"
+                  src={item.image}
+                  alt={item.name}
+                />
               </div>
             </div>
             <FavBtn
-              userFavs={userFavs}
               favs={favs}
               setFavs={setFavs}
               item={item}
