@@ -24,15 +24,15 @@ describe("Home", () => {
     expect(screen.queryByPlaceholderText("Name")).not.toBeInTheDocument();
   });
 
-  test("Register user succesfully", () => {
+  test("Register user succesfully", async () => {
     const route = "/";
-    const mockdata = { response: { status: 200 } };
-    axios.get.mockResolvedValueOnce(() =>
+    const mockdata = {
+      response: { data: { name: "vivi", email: "vivi@gmail.com" } },
+      status: 200,
+    };
+    axios.post.mockResolvedValueOnce(() =>
       Promise.resolve({
-        status: 200,
-        data: {
-          email: "rony@example.com",
-        },
+        mockdata,
       })
     );
 
@@ -42,6 +42,6 @@ describe("Home", () => {
       </ToggleColorModeProv>
     );
     fireEvent.click(screen.getByText("REGISTER"));
-    expect(screen.getByText("REGISTER")).not.toBeInTheDocument();
+    expect(await screen.queryByText("LOGIN")).toBeInTheDocument();
   });
 });

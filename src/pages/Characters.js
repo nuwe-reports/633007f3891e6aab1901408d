@@ -46,6 +46,7 @@ const Characters = ({ favs, setFavs, savedFavs, setSavedFavs }) => {
         setIsLoading(false);
       });
   }, [page]);
+
   // set favs in local storage
   useEffect(() => {
     if (favs.length) {
@@ -53,6 +54,7 @@ const Characters = ({ favs, setFavs, savedFavs, setSavedFavs }) => {
       localStorage.setItem("favs", json);
     }
   }, [favs]);
+
   //  get favs from local storage
   useEffect(() => {
     if (favs.length) {
@@ -64,11 +66,14 @@ const Characters = ({ favs, setFavs, savedFavs, setSavedFavs }) => {
     }
   }, [favs]);
 
-  // get favs on page load
+  // get stored favs on page load
   useEffect(() => {
     const localFavs = localStorage.getItem("favs");
-    if (localFavs.length) {
-      const parsedFavs = JSON.parse(localFavs);
+    const parsedFavs = () => {
+      if (localFavs.length !== 0) JSON.parse(localFavs);
+    };
+
+    if (parsedFavs.length) {
       setSavedFavs([...parsedFavs]);
       setFavs([...parsedFavs]);
     }
@@ -76,7 +81,7 @@ const Characters = ({ favs, setFavs, savedFavs, setSavedFavs }) => {
 
   return (
     <div className="main">
-      {isLoading && <Loader></Loader>}
+      {isLoading && <Loader data-testid="loader"></Loader>}
       <Box sx={{ flexGrow: 1 }}>
         {error && <h3>Sorry an error happen getting the data</h3>}
         {characters.length > 0 && (
