@@ -6,8 +6,10 @@ import { MemoryRouter } from "react-router-dom";
 import ToggleColorModeProv from "../../context/ThemeContext";
 import Characters from "../../pages/Characters";
 import RequireAuth from "../../context/RequireAuth";
+import App from "../../App";
 
 jest.mock("axios");
+
 afterEach(cleanup);
 
 const mockChars = {
@@ -297,31 +299,20 @@ describe("Characters", () => {
 
     render(
       <MemoryRouter initialEntries={["/chars"]}>
-        <RequireAuth>
-          <Characters />
-        </RequireAuth>
+        <Characters
+          favs={[]}
+          setFavs={(favs) => (favs = favs)}
+          savedFavs={[]}
+          setSavedFavs={(savedFavs) => (savedFavs = savedFavs)}
+        ></Characters>
       </MemoryRouter>
     );
-
-    //testing that the fetch is called
     expect(axios.get).toHaveBeenCalledTimes(1);
-    expect(axios.get).toHaveBeenCalledWith(
-      expect.stringContaining("dreadful-tomatoes")
-    );
+    expect(axios.get).toHaveBeenCalledWith(expect.stringContaining("rick"));
+    expect(await screen.findAllByTestId("img-item-small")).toHaveLength(4);
+    expect(await screen.queryByTestId("img-item-big")).not.toBeInTheDocument();
 
-    //testing that all the movies are rendering
-    expect(
-      await screen.findByText(mockItems.entries[2].title)
-    ).toBeInTheDocument();
-    expect(
-      await screen.findByText(mockItems.entries[3].title)
-    ).toBeInTheDocument();
-    render(
-      <ToggleColorModeProv>
-        <Characters />
-      </ToggleColorModeProv>
-    );
-    fireEvent.click(screen.getByText("REGISTER"));
-    expect(screen.getByText("REGISTER")).not.toBeInTheDocument();
+    fireEvent.click(await screen.queryAllByTestId("img-item-small")[0]);
+    expect(await screen.findByTestId("img-item-big")).toBeInTheDocument();
   });
 });

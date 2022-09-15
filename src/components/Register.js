@@ -13,9 +13,9 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const Register = ({
-  error,
+  
   setError,
-  errMssg,
+ 
   setErrMssg,
   handleShowPass,
   setShowRegister,
@@ -26,8 +26,7 @@ const Register = ({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  //ERRR fields
-  const errFields = ["name", "email", "password"];
+
 
   //errors
   const [nameError, setNameError] = useState("");
@@ -46,6 +45,7 @@ const Register = ({
       .then(function (response) {
         if (response.status === 200) {
           setShowRegister(false);
+          console.log(response);
         }
       })
       .catch(function (error) {

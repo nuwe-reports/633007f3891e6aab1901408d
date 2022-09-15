@@ -14,23 +14,16 @@ import ToggleThemeBTN from "./btns/ToggleThemeBTN";
 
 import LogoutBtn from "./btns/LogoutBtn";
 
-const ResponsiveAppBar = () => {
+const ResponsiveAppBar = ({ setFavs }) => {
   const [anchorElNav, setAnchorElNav] = React.useState();
   const [anchorElUser, setAnchorElUser] = React.useState();
   const email = localStorage.getItem("user");
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   return (
@@ -104,7 +97,7 @@ const ResponsiveAppBar = () => {
 
               {email !== "" && (
                 <Typography textAlign="center">
-                  <LogoutBtn onClick={handleCloseNavMenu} />
+                  <LogoutBtn onClick={handleCloseNavMenu} setFavs={setFavs} />
                 </Typography>
               )}
             </Menu>
@@ -120,7 +113,7 @@ const ResponsiveAppBar = () => {
             <Box sx={{ flexGrow: 0, width: { xs: "10%", md: "5%" } }}>
               <ToggleThemeBTN data-testid="toggle-btn"></ToggleThemeBTN>
             </Box>
-            {email !== "" && <LogoutBtn />}
+            {email !== "" && <LogoutBtn setFavs={setFavs} />}
           </Box>
         </Toolbar>
       </Container>

@@ -21,7 +21,7 @@ function App() {
     <Paper>
       <Router>
         <div className="app">
-          <Appbar />
+          <Appbar setFavs={setFavs} />
           <Routes>
             <Route path="/" element={<Home />} />
 

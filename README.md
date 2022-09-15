@@ -53,4 +53,4 @@ This app was made with **React** and **MUI**
 
 **Axios** on the data request
 
-**SASS** to write the styles needed
+**SASS** to write stylesheets
