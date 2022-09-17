@@ -1,12 +1,16 @@
 import React from "react";
 import axios from "axios";
-import { useState } from "react";
-import { screen, render, cleanup, fireEvent } from "@testing-library/react";
+
+import {
+  screen,
+  render,
+  cleanup,
+  fireEvent,
+  act,
+} from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import ToggleColorModeProv from "../../context/ThemeContext";
+
 import Characters from "../../pages/Characters";
-import RequireAuth from "../../context/RequireAuth";
-import App from "../../App";
 
 jest.mock("axios");
 
@@ -294,25 +298,62 @@ const mockChars = {
 };
 
 describe("Characters", () => {
-  test("Render characters page when location is /chars", async () => {
-    axios.get.mockResolvedValueOnce({ data: mockChars });
+  test("Render characters page and cards", async () => {
+    act(() => {
+      axios.get.mockResolvedValueOnce({ data: mockChars });
 
-    render(
-      <MemoryRouter initialEntries={["/chars"]}>
-        <Characters
-          favs={[]}
-          setFavs={(favs) => (favs = favs)}
-          savedFavs={[]}
-          setSavedFavs={(savedFavs) => (savedFavs = savedFavs)}
-        ></Characters>
-      </MemoryRouter>
-    );
-    expect(axios.get).toHaveBeenCalledTimes(1);
-    expect(axios.get).toHaveBeenCalledWith(expect.stringContaining("rick"));
+      render(
+        <MemoryRouter initialEntries={["/chars"]}>
+          <Characters
+            favs={[]}
+            setFavs={(favs) => favs}
+            savedFavs={[]}
+            setSavedFavs={(savedFavs) => savedFavs}
+          ></Characters>
+        </MemoryRouter>
+      );
+    });
+
+    //test if render one card for each char
+    expect(await screen.findAllByTestId("itemSmall")).toHaveLength(4);
+
+    // test if small item showing and big item not showing
     expect(await screen.findAllByTestId("img-item-small")).toHaveLength(4);
     expect(await screen.queryByTestId("img-item-big")).not.toBeInTheDocument();
 
-    fireEvent.click(await screen.queryAllByTestId("img-item-small")[0]);
+    //test if favs btn rendering
+    expect(await screen.findAllByTestId("fav-btn")).toHaveLength(4);
+    expect(
+      await screen.queryAllByTestId("favorite-border")[0]
+    ).not.toBeInTheDocument();
+
+    //test if favs toggle color on click
+    act(() => {
+      fireEvent.click(screen.queryAllByTestId("fav-btn")[0]);
+    });
+    expect(await screen.findByTestId("fav-btn")[0]).toHaveStyle(
+      `color: #FE0D13`
+    );
+    //test if click on char img open big item
+    act(() => {
+      fireEvent.click(screen.queryAllByTestId("img-item-small")[0]);
+    });
     expect(await screen.findByTestId("img-item-big")).toBeInTheDocument();
+  });
+
+  test("should call axios", async () => {
+    axios.get.mockResolvedValueOnce({ data: mockChars });
+
+    render(
+      <Characters
+        favs={[]}
+        setFavs={(favs) => favs}
+        savedFavs={[]}
+        setSavedFavs={(savedFavs) => savedFavs}
+      ></Characters>
+    );
+
+    expect(axios.get).toHaveBeenCalledTimes(1);
+    expect(axios.get).toHaveBeenCalledWith(expect.stringContaining("rick"));
   });
 });

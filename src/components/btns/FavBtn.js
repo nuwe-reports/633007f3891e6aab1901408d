@@ -11,10 +11,11 @@ const FavBtn = ({ savedFavs, favs, setFavs, item }) => {
   }
 
   return (
-    <div>
+    <div data-testid="fav-btn">
       {savedFavs.some((x) => x.id === item.id) ? (
         <Button onClick={removeFromFavs}>
           <Favorite
+            data-testid="favorite"
             sx={{
               color: "#FE0D13",
             }}
@@ -22,7 +23,7 @@ const FavBtn = ({ savedFavs, favs, setFavs, item }) => {
         </Button>
       ) : (
         <Button color="secondary" onClick={addToFavs}>
-          <FavoriteBorder></FavoriteBorder>
+          <FavoriteBorder data-testid="favorite-border"></FavoriteBorder>
         </Button>
       )}
     </div>
