@@ -93,7 +93,11 @@ function CharacterCard({
       ) : (
         <Grid item xs="auto">
           <Card>
-            <div className="itemSmall" onClick={toggleInfo}>
+            <div
+              className="itemSmall"
+              onClick={toggleInfo}
+              data-testid="itemSmall"
+            >
               <div>
                 <img
                   data-testid="img-item-small"

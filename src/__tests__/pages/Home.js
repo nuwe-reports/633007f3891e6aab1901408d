@@ -1,11 +1,22 @@
 import React from "react";
 import axios from "axios";
-import { screen, render, cleanup, fireEvent } from "@testing-library/react";
+import {
+  screen,
+  render,
+  cleanup,
+  fireEvent,
+  act,
+} from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import ToggleColorModeProv from "../../context/ThemeContext";
 import Home from "../../pages/Home";
+
 jest.mock("axios");
 afterEach(cleanup);
+const mockedResponse = {
+  data: { email: "vivi@gmail.com", name: "vivi", password: "" },
+  status: 200,
+};
 
 describe("Home", () => {
   test("should render Homepage", () => {
@@ -24,24 +35,32 @@ describe("Home", () => {
     expect(screen.queryByPlaceholderText("Name")).not.toBeInTheDocument();
   });
 
-  test("Register user succesfully", async () => {
+  test("replace register with login form when register ok", async () => {
     const route = "/";
-    const mockdata = {
-      response: { data: { name: "vivi", email: "vivi@gmail.com" } },
-      status: 200,
-    };
-    axios.post.mockResolvedValueOnce(() =>
-      Promise.resolve({
-        mockdata,
-      })
+    const mockedAxios = axios;
+
+    //mockedAxios.post.mockResolvedValueOnce(mockedResponse);
+    act(() => {
+      mockedAxios.post.mockResolvedValue(mockedResponse);
+      render(
+        <MemoryRouter initialEntries={[route]}>
+          <Home />
+        </MemoryRouter>
+      );
+    });
+
+    expect(axios.post).not.toHaveBeenCalled();
+    expect(screen.queryByText("LOGIN")).not.toBeInTheDocument();
+    act(() => {
+      fireEvent.click(screen.getByText("REGISTER"));
+    });
+
+    expect(axios.post).toHaveBeenCalledTimes(1);
+    expect(axios.post).toHaveBeenCalledWith(
+      "https://the-movieapp.herokuapp.com/auth/register",
+      { email: "", name: "", password: "" }
     );
 
-    render(
-      <ToggleColorModeProv>
-        <Home />
-      </ToggleColorModeProv>
-    );
-    fireEvent.click(screen.getByText("REGISTER"));
-    expect(await screen.queryByText("LOGIN")).toBeInTheDocument();
+    expect(await screen.findByText("LOGIN")).toBeInTheDocument();
   });
 });

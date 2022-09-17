@@ -13,9 +13,8 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const Register = ({
-  
   setError,
- 
+
   setErrMssg,
   handleShowPass,
   setShowRegister,
@@ -26,14 +25,13 @@ const Register = ({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
-
   //errors
   const [nameError, setNameError] = useState("");
   const [mailError, setMailError] = useState("");
   const [passwError, setPasswError] = useState("");
 
   //register func
+
   function registerUser(event) {
     event.preventDefault();
     axios
@@ -45,7 +43,7 @@ const Register = ({
       .then(function (response) {
         if (response.status === 200) {
           setShowRegister(false);
-          console.log(response);
+          // console.log(response);
         }
       })
       .catch(function (error) {
