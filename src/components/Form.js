@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import { useState } from "react";
 import rickAndMorty from "../assets/rick-and-morty.png";
 import Login from "./Login";

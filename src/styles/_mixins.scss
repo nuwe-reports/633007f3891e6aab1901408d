@@ -21,30 +21,17 @@
   justify-content: flex-start;
   align-items: flex-start;
 }
-@mixin btnNoBtn {
-  border: none;
-  outline: none;
-}
-@mixin btngroup {
+
+a {
+  margin: 0;
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-evenly;
-
-  a {
-    margin: 0;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-around;
-    align-items: center;
-    text-decoration: none;
+  justify-content: space-around;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  &:visited {
     color: white;
-    &:visited {
-      color: white;
-    }
-    span {
-      padding-right: 0;
-      padding-left: 0.4rem;
-    }
   }
 }
 

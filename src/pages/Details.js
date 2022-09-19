@@ -10,9 +10,10 @@ import Loader from "../components/Loader";
 import BackBtn from "../components/btns/BackBtn";
 import { Favorite } from "@mui/icons-material";
 import { speciesIcon, statusIcon } from "../service/customCharInfo";
+
 const Details = () => {
   const { id } = useParams();
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [favChars, setFavChars] = useState([]);
   const [char, setChar] = useState({
@@ -38,7 +39,7 @@ const Details = () => {
   const getNum = (e) => e.split("/")[5];
 
   useEffect(() => {
-    setError('');
+    setError("");
     setIsLoading(true);
     axios
       .get(`https://rickandmortyapi.com/api/character/${id}`)
@@ -48,7 +49,7 @@ const Details = () => {
       })
 
       .catch((error) => {
-        setError('There was an error geting this character info :(');
+        setError("There was an error geting this character info :(");
       })
       .finally(() => {
         setIsLoading(false);
@@ -59,11 +60,6 @@ const Details = () => {
     setEpisodesNum(char.episode.map((e) => getNum(e)));
   }, [char]);
 
-
-
-
-
-  
   useEffect(() => {
     axios
       .get(`https://rickandmortyapi.com/api/episode/${episodesNums[0]}`)
@@ -87,7 +83,7 @@ const Details = () => {
   return (
     <div className="main">
       {isLoading && <Loader></Loader>}
-      {(error !== "") && <h3>{error}</h3>}
+      {error !== "" && <h3>{error}</h3>}
       <Box>
         <Card className="det">
           <div className="details">

@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material";
 import { nameSize, speciesIcon, statusIcon } from "../service/customCharInfo";
+
 function CharInfo({ item }) {
   return (
     <>

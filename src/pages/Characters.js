@@ -5,7 +5,6 @@ import CharacterCard from "../components/CharacterCard";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Loader from "../components/Loader";
-
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 

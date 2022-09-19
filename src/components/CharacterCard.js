@@ -10,7 +10,7 @@ function CharacterCard({
   item,
   openCharInf,
   setOpenCharInf,
-  userFavs,
+
   favs,
   setFavs,
   savedFavs,
