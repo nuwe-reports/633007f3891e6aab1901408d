@@ -1,4 +1,5 @@
 import faces from "../assets/faces.png";
+
 function Loader() {
   return (
     <div className="loader">
@@ -7,6 +8,7 @@ function Loader() {
           src={faces}
           alt="Rick and Morty faces looking to each other"
           width="250px"
+          data-testid="loader"
         ></img>
       </div>
     </div>

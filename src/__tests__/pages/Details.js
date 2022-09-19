@@ -1,11 +1,10 @@
 import React from "react";
 import axios from "axios";
-import { useState } from "react";
+
 import { screen, render, cleanup, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import ToggleColorModeProv from "../../context/ThemeContext";
 import Details from "../../pages/Details";
-import RequireAuth from "../../context/RequireAuth";
 
 jest.mock("axios");
 afterEach(cleanup);

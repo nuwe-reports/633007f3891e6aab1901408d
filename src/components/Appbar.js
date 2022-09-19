@@ -7,11 +7,8 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-
 import Logo from "../assets/logo.png";
-
 import ToggleThemeBTN from "./btns/ToggleThemeBTN";
-
 import LogoutBtn from "./btns/LogoutBtn";
 
 const ResponsiveAppBar = ({ setFavs }) => {

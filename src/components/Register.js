@@ -3,7 +3,6 @@ import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import axios from "axios";
 import { useState } from "react";
-
 import IconButton from "@mui/material/IconButton";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -43,7 +42,6 @@ const Register = ({
       .then(function (response) {
         if (response.status === 200) {
           setShowRegister(false);
-          // console.log(response);
         }
       })
       .catch(function (error) {
@@ -151,6 +149,11 @@ const Register = ({
           color="secondary"
           onClick={() => {
             setShowRegister(false);
+            setError(false);
+            setNameError("");
+            setMailError("");
+            setPasswError("");
+            setErrMssg("");
           }}
         >
           here

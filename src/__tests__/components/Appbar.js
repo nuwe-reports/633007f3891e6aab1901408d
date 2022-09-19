@@ -6,7 +6,7 @@ import ToggleColorModeProv from "../../context/ThemeContext";
 import Appbar from "../../components/Appbar";
 import App from "../../App";
 import Home from "../../pages/Home";
-import Details from "../../pages/Details";
+
 afterEach(cleanup);
 
 describe("Appbar", () => {

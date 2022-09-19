@@ -1,22 +1,13 @@
 import React from "react";
 import axios from "axios";
-import {
-  screen,
-  render,
-  cleanup,
-  fireEvent,
-  act,
-} from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
-import ToggleColorModeProv from "../../context/ThemeContext";
+import { screen, render, cleanup, fireEvent } from "@testing-library/react";
+import { MemoryRouter, Router } from "react-router-dom";
+import { createMemoryHistory } from "history";
+
 import Home from "../../pages/Home";
 
 jest.mock("axios");
 afterEach(cleanup);
-const mockedResponse = {
-  data: { email: "vivi@gmail.com", name: "vivi", password: "" },
-  status: 200,
-};
 
 describe("Home", () => {
   test("should render Homepage", () => {
@@ -35,32 +26,176 @@ describe("Home", () => {
     expect(screen.queryByPlaceholderText("Name")).not.toBeInTheDocument();
   });
 
-  test("replace register with login form when register ok", async () => {
+  test("should replace register with login form when register ok", async () => {
     const route = "/";
     const mockedAxios = axios;
+    const mockedResponse = {
+      data: { email: "vivi@gmail.com", name: "vivi" },
+      status: 200,
+    };
 
-    //mockedAxios.post.mockResolvedValueOnce(mockedResponse);
-    act(() => {
-      mockedAxios.post.mockResolvedValue(mockedResponse);
-      render(
-        <MemoryRouter initialEntries={[route]}>
-          <Home />
-        </MemoryRouter>
-      );
-    });
+    mockedAxios.post.mockResolvedValueOnce(mockedResponse);
+    render(
+      <MemoryRouter initialEntries={[route]}>
+        <Home />
+      </MemoryRouter>
+    );
 
     expect(axios.post).not.toHaveBeenCalled();
     expect(screen.queryByText("LOGIN")).not.toBeInTheDocument();
-    act(() => {
-      fireEvent.click(screen.getByText("REGISTER"));
+    fireEvent.change(screen.getByPlaceholderText("Name"), {
+      target: { value: "vivi" },
     });
+    fireEvent.change(screen.getByPlaceholderText("Email"), {
+      target: { value: "vivi@gmail.com" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Password"), {
+      target: { value: "123456" },
+    });
+    fireEvent.click(screen.getByText("REGISTER"));
 
     expect(axios.post).toHaveBeenCalledTimes(1);
     expect(axios.post).toHaveBeenCalledWith(
       "https://the-movieapp.herokuapp.com/auth/register",
-      { email: "", name: "", password: "" }
+      {
+        name: "vivi",
+        email: "vivi@gmail.com",
+        password: "123456",
+      }
+    );
+    expect(await screen.findByText("LOGIN")).toBeInTheDocument();
+  });
+
+  test("should show empty field error mssgs on register form", async () => {
+    const route = "/";
+    const mockedAxios = axios;
+
+    const mockedError = {
+      response: {
+        data: {
+          fields: ["name", "email", "password"],
+          messages: [
+            "Please enter your name",
+            "Please enter an email",
+            "Please enter a password",
+          ],
+        },
+        status: 400,
+      },
+    };
+
+    render(
+      <MemoryRouter initialEntries={[route]}>
+        <Home />
+      </MemoryRouter>
     );
 
-    expect(await screen.findByText("LOGIN")).toBeInTheDocument();
+    mockedAxios.post.mockRejectedValueOnce(mockedError);
+
+    fireEvent.click(screen.getByText("REGISTER"));
+    expect(axios.post).toHaveBeenCalledTimes(1);
+    expect(axios.post).toHaveBeenCalledWith(
+      "https://the-movieapp.herokuapp.com/auth/register",
+      {
+        name: "",
+        email: "",
+        password: "",
+      }
+    );
+    expect(await screen.findByText("Please enter your name"));
+    expect(await screen.findByText("Please enter an email"));
+    expect(await screen.findByText("Please enter a password"));
+  });
+
+  test("should show duplicated email error mssg on register form", async () => {
+    const route = "/";
+    const mockedAxios = axios;
+
+    const mockedError = {
+      response: {
+        data: {
+          messages: "An account with that email already exists.",
+        },
+        status: 409,
+      },
+    };
+
+    render(
+      <MemoryRouter initialEntries={[route]}>
+        <Home />
+      </MemoryRouter>
+    );
+
+    mockedAxios.post.mockRejectedValueOnce(mockedError);
+    fireEvent.change(screen.getByPlaceholderText("Name"), {
+      target: { value: "vivi" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Email"), {
+      target: { value: "vivi@gmail.com" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Password"), {
+      target: { value: "123456" },
+    });
+    fireEvent.click(screen.getByText("REGISTER"));
+    expect(axios.post).toHaveBeenCalledTimes(1);
+    expect(axios.post).toHaveBeenCalledWith(
+      "https://the-movieapp.herokuapp.com/auth/register",
+      {
+        name: "vivi",
+        email: "vivi@gmail.com",
+        password: "123456",
+      }
+    );
+    expect(
+      await screen.findByText("An account with that email already exists.")
+    );
+  });
+
+  test("should show error mssg when other error", async () => {
+    const route = "/";
+    const mockedAxios = axios;
+
+    const mockedError = {
+      response: {
+        status: 500,
+      },
+    };
+
+    render(
+      <MemoryRouter initialEntries={[route]}>
+        <Home />
+      </MemoryRouter>
+    );
+
+    mockedAxios.post.mockRejectedValueOnce(mockedError);
+
+    fireEvent.click(screen.getByText("REGISTER"));
+
+    expect(
+      await screen.findByText("An unexpected error happened, please try again.")
+    );
+  });
+
+  test("should navigate /characters on successful login", async () => {
+    const route = "/";
+    const history = createMemoryHistory({ initialEntries: ["/"] });
+    const mockedAxios = axios;
+    const mockedResponse = {
+      data: { email: "vivi@gmail.com", name: "vivi" },
+      status: 200,
+    };
+
+    mockedAxios.post.mockResolvedValueOnce(mockedResponse);
+    render(
+      <Router location={history.location} navigator={history}>
+        <Home />
+      </Router>
+    );
+
+    fireEvent.click(screen.getByText("here"));
+    fireEvent.click(screen.getByText("LOGIN"));
+    expect(axios.post).toHaveBeenCalledTimes(1);
+    expect(await screen.findByTestId("loader")).toBeInTheDocument();
+    expect(history.location.pathname).toBe("/chars");
   });
 });

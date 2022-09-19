@@ -36,9 +36,11 @@ const Login = ({
         localStorage.setItem("user", response.data.email);
 
         navigate("/chars", { replace: true });
+        console.log(response);
       })
       .catch(function (err) {
         setError(err.response.data.message);
+        console.log(err);
       });
   }
 
@@ -102,6 +104,7 @@ const Login = ({
           color="secondary"
           onClick={() => {
             setShowRegister(true);
+            setError("");
           }}
         >
           here
