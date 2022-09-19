@@ -6,7 +6,6 @@ import Characters from "./pages/Characters";
 import NotFound from "./pages/NotFound";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Paper from "@mui/material/Paper";
-
 import Details from "./pages/Details";
 import RequireAuth from "./context/RequireAuth";
 import Footer from "./components/Footer";

@@ -7,8 +7,9 @@ const LogoutBtn = ({ setFavs }) => {
   const navigate = useNavigate();
 
   const logout = () => {
+    const url = process.env.REACT_APP_LOGOUT_URL;
     axios
-      .get("https://the-movieapp.herokuapp.com/auth/logout")
+      .get(url)
       .then(() => {
         localStorage.setItem("user", "");
         localStorage.setItem("favs", "");
