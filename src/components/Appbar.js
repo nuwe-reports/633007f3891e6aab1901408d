@@ -53,6 +53,7 @@ const ResponsiveAppBar = ({ setFavs }) => {
           {/* toggle dark theme  */}
 
           <Box
+            data-testid="menu-btn"
             sx={{
               flexGrow: 1,
               display: { xs: "flex", md: "none" },
@@ -87,10 +88,7 @@ const ResponsiveAppBar = ({ setFavs }) => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              <ToggleThemeBTN
-                onClick={handleCloseNavMenu}
-                data-testid="toggle-btn"
-              ></ToggleThemeBTN>
+              <ToggleThemeBTN onClick={handleCloseNavMenu}></ToggleThemeBTN>
 
               {email !== "" && (
                 <Typography textAlign="center">
@@ -107,7 +105,10 @@ const ResponsiveAppBar = ({ setFavs }) => {
               justifyContent: "flex-end",
             }}
           >
-            <Box sx={{ flexGrow: 0, width: { xs: "10%", md: "5%" } }}>
+            <Box
+              sx={{ flexGrow: 0, width: { xs: "10%", md: "5%" } }}
+              data-testid="toggle-btn"
+            >
               <ToggleThemeBTN data-testid="toggle-btn"></ToggleThemeBTN>
             </Box>
             {email !== "" && <LogoutBtn setFavs={setFavs} />}

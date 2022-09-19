@@ -27,8 +27,9 @@ const Login = ({
   //login func
   function loginUser(event) {
     event.preventDefault();
+    const url = process.env.REACT_APP_LOGIN_URL;
     axios
-      .post("https://the-movieapp.herokuapp.com/auth/login", {
+      .post(url, {
         email: email,
         password: password,
       })

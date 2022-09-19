@@ -10,7 +10,7 @@ import Home from "../../pages/Home";
 afterEach(cleanup);
 
 describe("Appbar", () => {
-  test("should render Appbar on Homepage", () => {
+  test.only("should render Appbar on Homepage", () => {
     const route = "/";
     render(
       <MemoryRouter initialEntries={[route]}>
@@ -19,7 +19,8 @@ describe("Appbar", () => {
         </ToggleColorModeProv>
       </MemoryRouter>
     );
-    expect(screen.queryByTestId("logo-img")).toBeInTheDocument();
+    expect(screen.getByTestId("logo-img")).toBeInTheDocument();
+    expect(screen.getByTestId("toggle-btn")).toBeInTheDocument();
   });
 
   test("should render Appbar on Character page", () => {
