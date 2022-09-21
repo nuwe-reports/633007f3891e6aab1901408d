@@ -1,7 +1,7 @@
 import Form from "../components/Form";
 import { useEffect } from "react";
-
-const Home = () => {
+import Loader from "../components/Loader";
+const Home = ({ isLoading }) => {
   useEffect(() => {
     localStorage.setItem("user", "");
     localStorage.setItem("favs", "");
@@ -9,6 +9,7 @@ const Home = () => {
 
   return (
     <div className="main" data-testid="app">
+      {isLoading && <Loader />}
       <Form></Form>
     </div>
   );

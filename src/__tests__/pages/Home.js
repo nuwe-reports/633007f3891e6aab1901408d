@@ -1,6 +1,12 @@
 import React from "react";
 import axios from "axios";
-import { screen, render, cleanup, fireEvent } from "@testing-library/react";
+import {
+  screen,
+  render,
+  cleanup,
+  fireEvent,
+  waitFor,
+} from "@testing-library/react";
 import { MemoryRouter, Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
 
@@ -64,6 +70,29 @@ describe("Home", () => {
       }
     );
     expect(await screen.findByText("LOGIN")).toBeInTheDocument();
+  });
+  test("should toggle show password", async () => {
+    const route = "/";
+
+    render(
+      <MemoryRouter initialEntries={[route]}>
+        <Home />
+      </MemoryRouter>
+    );
+
+    //test register form
+    expect(screen.getByTestId("show-pass")).toBeInTheDocument();
+
+    expect(screen.getAllByRole("textbox")).toHaveLength(2);
+    fireEvent.click(screen.getByTestId("show-pass"));
+    expect(screen.getAllByRole("textbox")).toHaveLength(3);
+    fireEvent.click(screen.getByTestId("show-pass"));
+    expect(screen.getAllByRole("textbox")).toHaveLength(2);
+    //test login form
+    fireEvent.click(screen.getByText("here"));
+    expect(screen.getAllByRole("textbox")).toHaveLength(1);
+    fireEvent.click(screen.getByTestId("show-pass"));
+    expect(screen.getAllByRole("textbox")).toHaveLength(2);
   });
 
   test("should show empty field error mssgs on register form", async () => {
@@ -173,7 +202,7 @@ describe("Home", () => {
 
     expect(
       await screen.findByText("An unexpected error happened, please try again.")
-    );
+    ).toBeInTheDocument();
   });
 
   test("should navigate /characters on successful login", async () => {
@@ -195,7 +224,33 @@ describe("Home", () => {
     fireEvent.click(screen.getByText("here"));
     fireEvent.click(screen.getByText("LOGIN"));
     expect(axios.post).toHaveBeenCalledTimes(1);
-    expect(await screen.findByTestId("loader")).toBeInTheDocument();
-    expect(history.location.pathname).toBe("/chars");
+
+    await waitFor(() => expect(history.location.pathname).toBe("/chars"));
+  });
+
+  test("should show error mssg when login unauthorized error", async () => {
+    const route = "/";
+    const mockedAxios = axios;
+
+    const mockedError = {
+      response: {
+        status: 401,
+        data: { message: "Incorrect username or password.", success: false },
+      },
+    };
+
+    render(
+      <MemoryRouter initialEntries={[route]}>
+        <Home />
+      </MemoryRouter>
+    );
+
+    mockedAxios.post.mockRejectedValueOnce(mockedError);
+    fireEvent.click(screen.getByText("here"));
+    fireEvent.click(screen.getByText("LOGIN"));
+
+    expect(
+      await screen.findByText("Incorrect username or password.")
+    ).toBeInTheDocument();
   });
 });

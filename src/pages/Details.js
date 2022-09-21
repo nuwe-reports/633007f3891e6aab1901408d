@@ -39,6 +39,14 @@ const Details = () => {
   const getNum = (e) => e.split("/")[5];
 
   useEffect(() => {
+    const localFavs = localStorage.getItem("favs");
+    if (localFavs.length) {
+      const parsedFavs = JSON.parse(localFavs);
+      setFavChars([...parsedFavs]);
+    }
+  }, []);
+
+  useEffect(() => {
     setError("");
     setIsLoading(true);
     axios
@@ -58,9 +66,7 @@ const Details = () => {
 
   useEffect(() => {
     setEpisodesNum(char.episode.map((e) => getNum(e)));
-  }, [char]);
-
-  useEffect(() => {
+    setFirstSeen("...");
     axios
       .get(`https://rickandmortyapi.com/api/episode/${episodesNums[0]}`)
       .then((response) => {
@@ -72,13 +78,6 @@ const Details = () => {
         setFirstSeen("Unknown");
       });
   }, [char]);
-  useEffect(() => {
-    const localFavs = localStorage.getItem("favs");
-    if (localFavs.length) {
-      const parsedFavs = JSON.parse(localFavs);
-      setFavChars([...parsedFavs]);
-    }
-  }, []);
 
   return (
     <div className="main">
@@ -92,6 +91,7 @@ const Details = () => {
                 {char.name}{" "}
                 {favChars.some((i) => i.id === char.id) && (
                   <Favorite
+                    data-testid="fav-icon"
                     sx={{
                       color: "#FE0D13",
                     }}
@@ -116,7 +116,9 @@ const Details = () => {
             <div className="info">
               <Typography variant="h6">⭐️ First seen at:</Typography>{" "}
               <Chip
-                label={`${episodesNums[0]}. ${firstSeen}`}
+                label={
+                  error === "" ? `${episodesNums[0]}. ${firstSeen}` : { error }
+                }
                 sx={{ margin: "2px" }}
               />
               <Typography>🎬 All the episodes: </Typography>
