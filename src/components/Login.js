@@ -76,6 +76,7 @@ const Login = ({
           endAdornment={
             <InputAdornment position="end">
               <IconButton
+                data-testid="show-pass"
                 aria-label="toggle password visibility"
                 onClick={handleShowPass}
                 // onMouseDown={handleMouseDownPassword}

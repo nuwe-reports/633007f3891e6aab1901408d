@@ -8,11 +8,18 @@ import Loader from "../components/Loader";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
-const Characters = ({ favs, setFavs, savedFavs, setSavedFavs }) => {
-  //loader
-  const [isLoading, setIsLoading] = useState(false);
+const Characters = ({
+  favs,
+  setFavs,
+  savedFavs,
+  setSavedFavs,
+  isLoading,
+  setIsLoading,
+  logoutError,
+}) => {
   //error getting data
   const [error, setError] = useState(false);
+
   //data
   const [characters, setCharacters] = useState([]);
   //char card open
@@ -83,6 +90,9 @@ const Characters = ({ favs, setFavs, savedFavs, setSavedFavs }) => {
       {isLoading && <Loader data-testid="loader"></Loader>}
       <Box sx={{ flexGrow: 1 }}>
         {error && <h3>Sorry an error happen getting the data</h3>}
+        {logoutError && (
+          <h3>An error happen when ending your session, please try again</h3>
+        )}
         {characters.length > 0 && (
           <Grid
             container

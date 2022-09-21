@@ -121,6 +121,7 @@ const Register = ({
           endAdornment={
             <InputAdornment position="end">
               <IconButton
+                data-testid="show-pass"
                 aria-label="toggle password visibility"
                 onClick={handleShowPass}
                 edge="end"

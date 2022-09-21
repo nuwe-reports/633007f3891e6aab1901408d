@@ -1,16 +1,26 @@
 import React from "react";
-import { screen, render, cleanup, fireEvent } from "@testing-library/react";
+import {
+  screen,
+  render,
+  cleanup,
+  fireEvent,
+  waitFor,
+} from "@testing-library/react";
+import axios from "axios";
 import { Router, MemoryRouter } from "react-router-dom";
 import { createMemoryHistory } from "history";
 import ToggleColorModeProv from "../../context/ThemeContext";
 import Appbar from "../../components/Appbar";
-import App from "../../App";
+
 import Home from "../../pages/Home";
+import Characters from "../../pages/Characters";
+
+jest.mock("axios");
 
 afterEach(cleanup);
 
 describe("Appbar", () => {
-  test.only("should render Appbar on Homepage", () => {
+  test("should render Appbar on Homepage", () => {
     const route = "/";
     render(
       <MemoryRouter initialEntries={[route]}>
@@ -27,47 +37,81 @@ describe("Appbar", () => {
     const route = "/chars";
 
     render(
-      <ToggleColorModeProv>
-        <App />
-      </ToggleColorModeProv>
-    );
-
-    expect(screen.queryByTestId("logo-img")).toBeInTheDocument();
-    expect(screen.queryAllByTestId("logout")).toHaveLength(2);
-  });
-
-  test("should navigate home on logout", () => {
-    const route = "/chars";
-    render(
       <MemoryRouter initialEntries={[route]}>
         <ToggleColorModeProv>
           <Appbar />
-          <Home />
         </ToggleColorModeProv>
       </MemoryRouter>
     );
+
+    expect(screen.queryByTestId("logo-img")).toBeInTheDocument();
     expect(screen.queryByTestId("logout")).toBeInTheDocument();
-    fireEvent.click(screen.getByTestId("logout"));
-    expect(
-      screen.getByText("Already registered? Please login")
-    ).toBeInTheDocument();
   });
 
-  test("should render Appbar on Details page", () => {
-    const route = "/chars/8";
-
-    const history = createMemoryHistory({ initialEntries: ["/chars/8"] });
-
+  test("should navigate home on logout", async () => {
+    const route = "/chars";
+    const history = createMemoryHistory({ initialEntries: ["/chars"] });
+    axios.get.mockResolvedValueOnce({ status: 200 });
     render(
       <Router location={history.location} navigator={history}>
         <ToggleColorModeProv>
-          <Appbar />
+          <Appbar
+            setLogoutError={(setLogoutError) => setLogoutError}
+            setFavs={(setFavs) => setFavs}
+            setIsLoading={(setIsLoading) => setIsLoading}
+          />
         </ToggleColorModeProv>
       </Router>
     );
+    expect(screen.getByText("Logout")).toBeInTheDocument();
+    expect(screen.queryByTestId("logout")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Logout"));
+    await waitFor(() => expect(history.location.pathname).toBe("/"));
+  });
 
-    expect(screen.queryByTestId("logo-img")).toBeInTheDocument();
+  test("should render Appbar on Details page and navigate '/' on logout", async () => {
+    axios.get.mockResolvedValueOnce({ status: 200 });
+    const history = createMemoryHistory({ initialEntries: ["/chars/8"] });
+    window.localStorage.setItem("user", "vivi@gmail.com");
+    render(
+      <Router location={history.location} navigator={history}>
+        <ToggleColorModeProv>
+          <Appbar
+            setLogoutError={(setLogoutError) => setLogoutError}
+            setFavs={(setFavs) => setFavs}
+            setIsLoading={(setIsLoading) => setIsLoading}
+          />
+        </ToggleColorModeProv>
+      </Router>
+    );
+    expect(localStorage.getItem("user")).toEqual("vivi@gmail.com");
+    expect(screen.getByText("Logout")).toBeInTheDocument();
+    expect(screen.queryByTestId("logout")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Logout"));
+    await waitFor(() => expect(history.location.pathname).toBe("/"));
+  });
+
+  test("should navigate '/chars'", async () => {
+    const history = createMemoryHistory({ initialEntries: ["/chars/8"] });
+    window.localStorage.setItem("user", "vivi@gmail.com");
+    render(
+      <Router location={history.location} navigator={history}>
+        <ToggleColorModeProv>
+          <Appbar
+            setLogoutError={(setLogoutError) => setLogoutError}
+            setFavs={(setFavs) => setFavs}
+            setIsLoading={(setIsLoading) => setIsLoading}
+          />
+        </ToggleColorModeProv>
+      </Router>
+    );
+    window.localStorage.setItem("user", "vivi@gmail.com");
+
+    expect(screen.getByTestId("logo-img")).toBeInTheDocument();
+
     fireEvent.click(screen.getByTestId("logo-img"));
+
+    await waitFor(() => expect(history.location.pathname).toBe("/chars"));
   });
 
   test("should toggle theme mode", () => {
@@ -83,15 +127,15 @@ describe("Appbar", () => {
 
     fireEvent.click(screen.getByTestId("dark-mode"));
     expect(screen.queryByTestId("light-mode")).toBeInTheDocument();
-    expect(screen.getByTestId("app-bar")).toHaveStyle(
-      `background-color: #0f0c29`
+
+    expect(screen.getByText("Already registered? Please login")).toHaveStyle(
+      `color: #fffff`
     );
-    expect(screen.getByTestId("app")).toHaveStyle(`background-color: #24243e`);
 
     fireEvent.click(screen.getByTestId("light-mode"));
-    expect(screen.queryAllByTestId("dark-mode")).toBeInTheDocument();
-    expect(screen.getByTestId("app-bar")).toHaveStyle(
-      `background-color: #FFFFFF`
+    expect(screen.getByTestId("dark-mode")).toBeInTheDocument();
+    expect(screen.getByText("Already registered? Please login")).toHaveStyle(
+      `color: "#4D4D4C"`
     );
   });
 });
