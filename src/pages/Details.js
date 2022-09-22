@@ -39,14 +39,6 @@ const Details = () => {
   const getNum = (e) => e.split("/")[5];
 
   useEffect(() => {
-    const localFavs = localStorage.getItem("favs");
-    if (localFavs.length) {
-      const parsedFavs = JSON.parse(localFavs);
-      setFavChars([...parsedFavs]);
-    }
-  }, []);
-
-  useEffect(() => {
     setError("");
     setIsLoading(true);
     axios
@@ -56,12 +48,21 @@ const Details = () => {
         setChar({ ...data });
       })
 
-      .catch((error) => {
-        setError("There was an error geting this character info :(");
+      .catch((err) => {
+        if (err) {
+          setError("There was an error geting this character info :(");
+        }
       })
       .finally(() => {
         setIsLoading(false);
       });
+  }, []);
+  useEffect(() => {
+    const localFavs = localStorage.getItem("favs");
+    if (localFavs.length) {
+      const parsedFavs = JSON.parse(localFavs);
+      setFavChars([...parsedFavs]);
+    }
   }, []);
 
   useEffect(() => {
@@ -74,8 +75,10 @@ const Details = () => {
         setFirstSeen(data.name);
       })
 
-      .catch((error) => {
-        setFirstSeen("Unknown");
+      .catch((err) => {
+        if (err) {
+          setFirstSeen("Unknown");
+        }
       });
   }, [char]);
 
@@ -115,12 +118,14 @@ const Details = () => {
             </div>
             <div className="info">
               <Typography variant="h6">⭐️ First seen at:</Typography>{" "}
-              <Chip
-                label={
-                  error === "" ? `${episodesNums[0]}. ${firstSeen}` : { error }
-                }
-                sx={{ margin: "2px" }}
-              />
+              {error === "" ? (
+                <Chip
+                  label={`${episodesNums[0]}. ${firstSeen}`}
+                  sx={{ margin: "2px" }}
+                />
+              ) : (
+                <Chip label="Unknown" sx={{ margin: "2px" }} />
+              )}
               <Typography>🎬 All the episodes: </Typography>
               <Box sx={{ maxWidth: "80%" }}>
                 {episodesNums.map((e) => (

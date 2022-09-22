@@ -32,6 +32,7 @@ const Characters = ({
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
+  const [totalPages, setTotalPages] = useState(0);
 
   //---get data-------**********-------------**************-----------
 
@@ -44,12 +45,15 @@ const Characters = ({
       .then((response) => {
         const characters = [...response.data.results];
         setCharacters([...characters]);
+
+        setTotalPages(response.data.info.pages);
       })
       .catch((error) => {
         setError(true);
       })
       .finally(() => {
         setIsLoading(false);
+        setError(false);
       });
   }, [page]);
 
@@ -118,7 +122,7 @@ const Characters = ({
       </Box>
       <div className="btn">
         <Stack spacing={2}>
-          <Pagination count={42} page={page} onChange={handleChange} />
+          <Pagination count={totalPages} page={page} onChange={handleChange} />
         </Stack>
       </div>
     </div>
