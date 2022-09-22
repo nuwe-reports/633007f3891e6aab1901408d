@@ -7,9 +7,10 @@ import {
   fireEvent,
   waitFor,
 } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter, Router } from "react-router-dom";
 import favs from "../favs.json";
 import Details from "../../pages/Details";
+import { createMemoryHistory } from "history";
 
 jest.mock("axios");
 afterEach(cleanup);
@@ -417,6 +418,7 @@ describe("details", () => {
     expect(await screen.findByText("⭐️ First seen at:")).toBeInTheDocument();
 
     expect(await screen.findByText("🎬 All the episodes:")).toBeInTheDocument();
+    expect(await screen.findByText("20")).toBeInTheDocument();
     //no fav icon if char is no fav
     expect(await screen.queryByTestId("fav-icon")).not.toBeInTheDocument();
   });
@@ -446,7 +448,12 @@ describe("details", () => {
         status: 500,
       },
     };
-    axios.get.mockRejectedValue(mockedError);
+
+    axios.get.mockRejectedValue({
+      response: {
+        status: 500,
+      },
+    });
 
     render(
       <MemoryRouter initialEntries={["/chars/2"]}>
@@ -454,13 +461,25 @@ describe("details", () => {
       </MemoryRouter>
     );
 
-    //character info error
     expect(
       await screen.findByText(
         "There was an error geting this character info :("
       )
     ).toBeInTheDocument();
-    //chapter name error
     expect(await screen.findByText("Unknown")).toBeInTheDocument();
+  });
+
+  test("should navigate '/chars' when click on back btn", async () => {
+    const history = createMemoryHistory({ initialEntries: ["/chars/8"] });
+    axios.get.mockResolvedValue({ data: mockChar });
+    render(
+      <Router location={history.location} navigator={history}>
+        <Details />
+      </Router>
+    );
+
+    expect(screen.getByText("Back")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Back"));
+    await waitFor(() => expect(history.location.pathname).toBe("/chars"));
   });
 });

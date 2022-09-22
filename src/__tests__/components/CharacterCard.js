@@ -1,7 +1,13 @@
 import React from "react";
-import { screen, render, cleanup, fireEvent } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
-
+import {
+  screen,
+  render,
+  cleanup,
+  fireEvent,
+  waitFor,
+} from "@testing-library/react";
+import { MemoryRouter, Router, Route, Routes } from "react-router-dom";
+import { createMemoryHistory } from "history";
 import CharacterCard from "../../components/CharacterCard";
 
 const character = {
@@ -118,5 +124,6 @@ describe("CharacterCard", () => {
     expect(screen.getByText("See complete info...")).toBeInTheDocument();
     expect(screen.getByTestId("img-item-big")).toBeInTheDocument();
     expect(screen.getByTestId("favorite-border")).toBeInTheDocument();
+    expect(document.querySelector("a").getAttribute("href")).toBe("/chars/1");
   });
 });
