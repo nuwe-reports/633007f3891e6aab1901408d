@@ -17,7 +17,6 @@ afterEach(cleanup);
 
 describe("Login", () => {
   test("should navigate /characters on successful login", async () => {
-    const route = "/";
     const history = createMemoryHistory({ initialEntries: ["/"] });
     const mockedAxios = axios;
     const mockedResponse = {

@@ -7,7 +7,6 @@ afterEach(cleanup);
 
 describe("Loader", () => {
   test("should render Loader", () => {
-    const route = "/";
     render(<Loader />);
 
     expect(screen.getByTestId("loader")).toBeInTheDocument();
