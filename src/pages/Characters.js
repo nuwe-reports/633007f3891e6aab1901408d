@@ -9,10 +9,10 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
 const Characters = ({
-  favs,
-  setFavs,
-  savedFavs,
-  setSavedFavs,
+  // favs,
+  // setFavs,
+  // savedFavs,
+  // setSavedFavs,
   isLoading,
   setIsLoading,
   logoutError,
@@ -27,6 +27,8 @@ const Characters = ({
     { name: "", status: "", species: "", gender: "", origin: "", image: "" },
   ]);
 
+  const [savedFavs, setSavedFavs] = useState([]);
+  const [favs, setFavs] = useState([]);
   //pagination --------------------**********************
   const [page, setPage] = React.useState(1);
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
@@ -47,13 +49,13 @@ const Characters = ({
         setCharacters([...characters]);
 
         setTotalPages(response.data.info.pages);
+        setError(false);
       })
       .catch((error) => {
-        setError(true);
+        if (error) setError(true);
       })
       .finally(() => {
         setIsLoading(false);
-        setError(false);
       });
   }, [page]);
 
@@ -78,9 +80,11 @@ const Characters = ({
 
   // get stored favs on page load
   useEffect(() => {
+    console.log(savedFavs);
+    console.log(favs);
     const localFavs = localStorage.getItem("favs");
     const parsedFavs = () => {
-      if (localFavs.length !== 0) JSON.parse(localFavs);
+      JSON.parse(localFavs);
     };
 
     if (parsedFavs.length) {

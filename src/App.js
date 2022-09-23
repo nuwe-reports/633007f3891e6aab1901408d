@@ -12,9 +12,9 @@ import Footer from "./components/Footer";
 
 function App() {
   // fav characters
-  const [favs, setFavs] = useState([]);
+
   const [isLoading, setIsLoading] = useState(false);
-  const [savedFavs, setSavedFavs] = useState([]);
+
   //logout error
   const [logoutError, setLogoutError] = useState(false);
   return (
@@ -22,7 +22,7 @@ function App() {
       <Router>
         <div className="app">
           <Appbar
-            setFavs={setFavs}
+            // setFavs={setFavs}
             setIsLoading={setIsLoading}
             setLogoutError={setLogoutError}
           />
@@ -40,10 +40,10 @@ function App() {
               element={
                 <RequireAuth>
                   <Characters
-                    favs={favs}
-                    setFavs={setFavs}
-                    savedFavs={savedFavs}
-                    setSavedFavs={setSavedFavs}
+                    // favs={favs}
+                    // setFavs={setFavs}
+                    // savedFavs={savedFavs}
+                    // setSavedFavs={setSavedFavs}
                     isLoading={isLoading}
                     setIsLoading={setIsLoading}
                     logoutError={logoutError}
