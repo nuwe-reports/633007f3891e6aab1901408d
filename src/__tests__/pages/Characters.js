@@ -1,13 +1,19 @@
 import React from "react";
 import axios from "axios";
-import { screen, render, cleanup, fireEvent } from "@testing-library/react";
+import {
+  screen,
+  render,
+  cleanup,
+  fireEvent,
+  waitFor,
+  getByTestId,
+} from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import Characters from "../../pages/Characters";
 
 jest.mock("axios");
-
-afterEach(cleanup);
-
+Storage.prototype.getItem = jest.fn();
+Storage.prototype.setItem = jest.fn();
 const mockChars = {
   info: {
     count: 826,
@@ -289,6 +295,8 @@ const mockChars = {
   ],
 };
 
+afterEach(cleanup);
+
 describe("Characters", () => {
   test("Render characters page and cards", async () => {
     axios.get.mockResolvedValueOnce({ data: mockChars });
@@ -297,7 +305,7 @@ describe("Characters", () => {
       <MemoryRouter initialEntries={["/chars"]}>
         <Characters
           favs={[]}
-          setFavs={(favs) => favs}
+          setFavs={() => null}
           savedFavs={[
             {
               id: 1,
@@ -372,8 +380,8 @@ describe("Characters", () => {
               created: "2017-11-04T18:48:46.250Z",
             },
           ]}
-          setSavedFavs={(savedFavs) => savedFavs}
-          setIsLoading={(setIsLoading) => setIsLoading}
+          setSavedFavs={() => null}
+          setIsLoading={() => null}
         ></Characters>
       </MemoryRouter>
     );
@@ -404,4 +412,47 @@ describe("Characters", () => {
     fireEvent.click(screen.queryAllByTestId("img-item-big")[0]);
     expect(screen.queryByText("Rick Sanchez")).not.toBeInTheDocument();
   });
+
+  test("should show error msg when axios return error", async () => {
+    axios.get.mockRejectedValueOnce({ response: { status: 500 } });
+
+    render(
+      <MemoryRouter initialEntries={["/chars"]}>
+        <Characters
+          favs={[]}
+          setFavs={() => null}
+          savedFavs={[]}
+          setSavedFavs={() => null}
+          setIsLoading={() => null}
+        ></Characters>
+      </MemoryRouter>
+    );
+
+    //test if axios called
+    expect(axios.get).toHaveBeenCalledTimes(1);
+    expect(axios.get).toHaveBeenCalledWith(expect.stringContaining("rick"));
+    expect(
+      await screen.findByText("Sorry an error happen getting the data")
+    ).toBeInTheDocument();
+  });
+
+  // test("should call localstorage", async () => {
+  //   axios.get.mockResolvedValueOnce({ data: mockChars });
+
+  //   render(
+  //     <MemoryRouter initialEntries={["/chars"]}>
+  //       <Characters
+  //         favs={[]}
+  //         setFavs={() => null}
+  //         savedFavs={[]}
+  //         setSavedFavs={() => null}
+  //         setIsLoading={() => null}
+  //       ></Characters>
+  //     </MemoryRouter>
+  //   );
+
+  //   //test if localstorage is called
+  //   expect(localStorage.getItem).toHaveBeenCalled();
+  //   expect(localStorage.getItem).toHaveBeenCalledTimes(1);
+  // });
 });
