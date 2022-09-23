@@ -436,23 +436,23 @@ describe("Characters", () => {
     ).toBeInTheDocument();
   });
 
-  // test("should call localstorage", async () => {
-  //   axios.get.mockResolvedValueOnce({ data: mockChars });
+  test("should call localstorage", async () => {
+    axios.get.mockResolvedValueOnce({ data: mockChars });
 
-  //   render(
-  //     <MemoryRouter initialEntries={["/chars"]}>
-  //       <Characters
-  //         favs={[]}
-  //         setFavs={() => null}
-  //         savedFavs={[]}
-  //         setSavedFavs={() => null}
-  //         setIsLoading={() => null}
-  //       ></Characters>
-  //     </MemoryRouter>
-  //   );
+    render(
+      <MemoryRouter initialEntries={["/chars"]}>
+        <Characters
+          favs={[]}
+          setFavs={() => null}
+          savedFavs={[]}
+          setSavedFavs={() => null}
+          setIsLoading={() => null}
+        ></Characters>
+      </MemoryRouter>
+    );
 
-  //   //test if localstorage is called
-  //   expect(localStorage.getItem).toHaveBeenCalled();
-  //   expect(localStorage.getItem).toHaveBeenCalledTimes(1);
-  // });
+    //test if localstorage is called
+    expect(localStorage.getItem).toHaveBeenCalled();
+    expect(localStorage.getItem).toHaveBeenCalledTimes(1);
+  });
 });

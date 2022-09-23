@@ -9,26 +9,28 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
 const Characters = ({
-  // favs,
-  // setFavs,
-  // savedFavs,
-  // setSavedFavs,
+  favs,
+  setFavs,
+
   isLoading,
   setIsLoading,
   logoutError,
 }) => {
+  // fav characters
+
+  const [savedFavs, setSavedFavs] = useState([]);
+
   //error getting data
   const [error, setError] = useState(false);
 
   //data
   const [characters, setCharacters] = useState([]);
+
   //char card open
   const [openCharInf, setOpenCharInf] = useState([
     { name: "", status: "", species: "", gender: "", origin: "", image: "" },
   ]);
 
-  const [savedFavs, setSavedFavs] = useState([]);
-  const [favs, setFavs] = useState([]);
   //pagination --------------------**********************
   const [page, setPage] = React.useState(1);
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
@@ -36,7 +38,7 @@ const Characters = ({
   };
   const [totalPages, setTotalPages] = useState(0);
 
-  //---get data-------**********-------------**************-----------
+  //---get data---- ---**********---- ---- -----**************--- --- --- --
 
   useEffect(() => {
     setError(false);
@@ -47,49 +49,21 @@ const Characters = ({
       .then((response) => {
         const characters = [...response.data.results];
         setCharacters([...characters]);
-
         setTotalPages(response.data.info.pages);
-        setError(false);
       })
       .catch((error) => {
-        if (error) setError(true);
+        setError(true);
       })
       .finally(() => {
         setIsLoading(false);
       });
   }, [page]);
 
-  // set favs in local storage
   useEffect(() => {
-    if (favs.length) {
-      const json = JSON.stringify(favs);
-      localStorage.setItem("favs", json);
-    }
-  }, [favs]);
-
-  //  get favs from local storage
-  useEffect(() => {
-    if (favs.length) {
-      const localFavs = localStorage.getItem("favs");
+    const localFavs = localStorage.getItem("favs");
+    if (localFavs.length) {
       const parsedFavs = JSON.parse(localFavs);
       setSavedFavs([...parsedFavs]);
-    } else {
-      setSavedFavs([]);
-    }
-  }, [favs]);
-
-  // get stored favs on page load
-  useEffect(() => {
-    console.log(savedFavs);
-    console.log(favs);
-    const localFavs = localStorage.getItem("favs");
-    const parsedFavs = () => {
-      JSON.parse(localFavs);
-    };
-
-    if (parsedFavs.length) {
-      setSavedFavs([...parsedFavs]);
-      setFavs([...parsedFavs]);
     }
   }, []);
 
@@ -114,8 +88,9 @@ const Characters = ({
               <CharacterCard
                 key={item.id}
                 item={item}
-                savedFavs={savedFavs}
                 favs={favs}
+                savedFavs={savedFavs}
+                setSavedFavs={setSavedFavs}
                 setFavs={setFavs}
                 openCharInf={openCharInf}
                 setOpenCharInf={setOpenCharInf}

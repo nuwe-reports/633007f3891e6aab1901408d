@@ -5,7 +5,7 @@ import Login from "./Login";
 import Register from "./Register";
 import { Paper } from "@mui/material";
 
-const Form = () => {
+const Form = ({ setIsLoading }) => {
   ////  password visibility icon
   const [showPassword, setShowPassword] = useState();
   const handleShowPass = (e) => {
@@ -34,6 +34,7 @@ const Form = () => {
         ></img>
         {showRegister ? (
           <Register
+            setIsLoading={setIsLoading}
             error={error}
             setError={setError}
             errMssg={errMssg}
@@ -44,6 +45,7 @@ const Form = () => {
           ></Register>
         ) : (
           <Login
+            setIsLoading={setIsLoading}
             error={error}
             setError={setError}
             handleShowPass={handleShowPass}

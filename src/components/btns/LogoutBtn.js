@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { LogoutRounded } from "@mui/icons-material";
 
 const LogoutBtn = ({ setFavs, setIsLoading, setLogoutError }) => {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ const LogoutBtn = ({ setFavs, setIsLoading, setLogoutError }) => {
     setLogoutError(false);
     setIsLoading(true);
     const url = process.env.REACT_APP_LOGOUT_URL;
+
     axios
       .get(url)
       .then((response) => {
@@ -19,13 +21,15 @@ const LogoutBtn = ({ setFavs, setIsLoading, setLogoutError }) => {
           localStorage.setItem("favs", "");
           setFavs([]);
           navigate("/");
-
-          setIsLoading(false);
-          console.log(response);
         }
       })
       .catch((error) => {
-        setLogoutError(true);
+        if (error) {
+          setLogoutError(true);
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 

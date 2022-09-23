@@ -10,7 +10,7 @@ function CharacterCard({
   item,
   openCharInf,
   setOpenCharInf,
-
+  setSavedFavs,
   favs,
   setFavs,
   savedFavs,
@@ -76,6 +76,7 @@ function CharacterCard({
                   setFavs={setFavs}
                   item={item}
                   savedFavs={savedFavs}
+                  setSavedFavs={setSavedFavs}
                 ></FavBtn>
                 <Typography>
                   <Link
@@ -111,6 +112,7 @@ function CharacterCard({
               setFavs={setFavs}
               item={item}
               savedFavs={savedFavs}
+              setSavedFavs={setSavedFavs}
             ></FavBtn>
           </Card>
         </Grid>

@@ -10,7 +10,7 @@ import Logo from "../assets/logo.png";
 import ToggleThemeBTN from "./btns/ToggleThemeBTN";
 import LogoutBtn from "./btns/LogoutBtn";
 
-const ResponsiveAppBar = ({ setIsLoading, setLogoutError }) => {
+const ResponsiveAppBar = ({ setFavs, setIsLoading, setLogoutError }) => {
   const email = localStorage.getItem("user");
 
   return (
@@ -53,6 +53,7 @@ const ResponsiveAppBar = ({ setIsLoading, setLogoutError }) => {
             </Box>
             {email !== "" && (
               <LogoutBtn
+                setFavs={setFavs}
                 setIsLoading={setIsLoading}
                 setLogoutError={setLogoutError}
               />
