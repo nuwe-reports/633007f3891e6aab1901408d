@@ -1,87 +1,13 @@
 import React from "react";
 import axios from "axios";
-
 import { screen, render, cleanup, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-
 import Characters from "../../pages/Characters";
-import Details from "../../pages/Details";
+
 jest.mock("axios");
 
 afterEach(cleanup);
 
-const character = {
-  id: 1,
-  name: "Rick Sanchez",
-  status: "Alive",
-  species: "Human",
-  type: "",
-  gender: "Male",
-  origin: {
-    name: "Earth (C-137)",
-    url: "https://rickandmortyapi.com/api/location/1",
-  },
-  location: {
-    name: "Citadel of Ricks",
-    url: "https://rickandmortyapi.com/api/location/3",
-  },
-  image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-  episode: [
-    "https://rickandmortyapi.com/api/episode/1",
-    "https://rickandmortyapi.com/api/episode/2",
-    "https://rickandmortyapi.com/api/episode/3",
-    "https://rickandmortyapi.com/api/episode/4",
-    "https://rickandmortyapi.com/api/episode/5",
-    "https://rickandmortyapi.com/api/episode/6",
-    "https://rickandmortyapi.com/api/episode/7",
-    "https://rickandmortyapi.com/api/episode/8",
-    "https://rickandmortyapi.com/api/episode/9",
-    "https://rickandmortyapi.com/api/episode/10",
-    "https://rickandmortyapi.com/api/episode/11",
-    "https://rickandmortyapi.com/api/episode/12",
-    "https://rickandmortyapi.com/api/episode/13",
-    "https://rickandmortyapi.com/api/episode/14",
-    "https://rickandmortyapi.com/api/episode/15",
-    "https://rickandmortyapi.com/api/episode/16",
-    "https://rickandmortyapi.com/api/episode/17",
-    "https://rickandmortyapi.com/api/episode/18",
-    "https://rickandmortyapi.com/api/episode/19",
-    "https://rickandmortyapi.com/api/episode/20",
-    "https://rickandmortyapi.com/api/episode/21",
-    "https://rickandmortyapi.com/api/episode/22",
-    "https://rickandmortyapi.com/api/episode/23",
-    "https://rickandmortyapi.com/api/episode/24",
-    "https://rickandmortyapi.com/api/episode/25",
-    "https://rickandmortyapi.com/api/episode/26",
-    "https://rickandmortyapi.com/api/episode/27",
-    "https://rickandmortyapi.com/api/episode/28",
-    "https://rickandmortyapi.com/api/episode/29",
-    "https://rickandmortyapi.com/api/episode/30",
-    "https://rickandmortyapi.com/api/episode/31",
-    "https://rickandmortyapi.com/api/episode/32",
-    "https://rickandmortyapi.com/api/episode/33",
-    "https://rickandmortyapi.com/api/episode/34",
-    "https://rickandmortyapi.com/api/episode/35",
-    "https://rickandmortyapi.com/api/episode/36",
-    "https://rickandmortyapi.com/api/episode/37",
-    "https://rickandmortyapi.com/api/episode/38",
-    "https://rickandmortyapi.com/api/episode/39",
-    "https://rickandmortyapi.com/api/episode/40",
-    "https://rickandmortyapi.com/api/episode/41",
-    "https://rickandmortyapi.com/api/episode/42",
-    "https://rickandmortyapi.com/api/episode/43",
-    "https://rickandmortyapi.com/api/episode/44",
-    "https://rickandmortyapi.com/api/episode/45",
-    "https://rickandmortyapi.com/api/episode/46",
-    "https://rickandmortyapi.com/api/episode/47",
-    "https://rickandmortyapi.com/api/episode/48",
-    "https://rickandmortyapi.com/api/episode/49",
-    "https://rickandmortyapi.com/api/episode/50",
-    "https://rickandmortyapi.com/api/episode/51",
-  ],
-  url: "https://rickandmortyapi.com/api/character/1",
-  created: "2017-11-04T18:48:46.250Z",
-};
 const mockChars = {
   info: {
     count: 826,
@@ -461,8 +387,8 @@ describe("Characters", () => {
 
     // test if small item showing and big item not showing
     expect(await screen.findAllByTestId("img-item-small")).toHaveLength(4);
-    expect(await screen.queryByTestId("img-item-big")).not.toBeInTheDocument();
-    expect(await screen.queryByText("Rick Sanchez")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("img-item-big")).not.toBeInTheDocument();
+    expect(screen.queryByText("Rick Sanchez")).not.toBeInTheDocument();
 
     //test if favs btn rendering correctly
     expect(await screen.findAllByTestId("fav-btn")).toHaveLength(4);
@@ -476,6 +402,6 @@ describe("Characters", () => {
 
     //test if click on char img close big item
     fireEvent.click(screen.queryAllByTestId("img-item-big")[0]);
-    expect(await screen.queryByText("Rick Sanchez")).not.toBeInTheDocument();
+    expect(screen.queryByText("Rick Sanchez")).not.toBeInTheDocument();
   });
 });

@@ -15,7 +15,7 @@ describe("NotFound", () => {
         <NotFound />
       </MemoryRouter>
     );
-    expect(document.querySelector("img").getAttribute("alt")).toBe(
+    expect(screen.getByRole("img").getAttribute("alt")).toBe(
       "Rick and Morty throw the portal"
     );
     expect(screen.getByTestId("not-found-img")).toBeInTheDocument();

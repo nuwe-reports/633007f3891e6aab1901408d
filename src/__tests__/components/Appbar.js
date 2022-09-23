@@ -14,9 +14,6 @@ import ToggleColorModeProv from "../../context/ThemeContext";
 import Appbar from "../../components/Appbar";
 
 import Home from "../../pages/Home";
-import App from "../../App";
-import Characters from "../../pages/Characters";
-import RequireAuth from "../../context/RequireAuth";
 
 jest.mock("axios");
 
@@ -52,7 +49,6 @@ describe("Appbar", () => {
   });
 
   test("should navigate home on logout", async () => {
-    const route = "/chars";
     const history = createMemoryHistory({ initialEntries: ["/chars"] });
     axios.get.mockResolvedValueOnce({ status: 200 });
     render(

@@ -73,9 +73,15 @@ describe("Register", () => {
         password: "",
       }
     );
-    expect(await screen.findByText("Please enter your name"));
-    expect(await screen.findByText("Please enter an email"));
-    expect(await screen.findByText("Please enter a password"));
+    expect(
+      await screen.findByText("Please enter your name")
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText("Please enter an email")
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText("Please enter a password")
+    ).toBeInTheDocument();
   });
 
   test("should show duplicated email error mssg on register form", async () => {
@@ -119,7 +125,7 @@ describe("Register", () => {
     );
     expect(
       await screen.findByText("An account with that email already exists.")
-    );
+    ).toBeInTheDocument();
   });
 
   test("should show error mssg when other error", async () => {

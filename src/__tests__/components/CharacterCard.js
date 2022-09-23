@@ -1,13 +1,6 @@
 import React from "react";
-import {
-  screen,
-  render,
-  cleanup,
-  fireEvent,
-  waitFor,
-} from "@testing-library/react";
-import { MemoryRouter, Router, Route, Routes } from "react-router-dom";
-import { createMemoryHistory } from "history";
+import { screen, render, cleanup } from "@testing-library/react";
+
 import CharacterCard from "../../components/CharacterCard";
 
 const character = {
@@ -101,7 +94,7 @@ describe("CharacterCard", () => {
         item={character}
         setOpenCharInf={{}}
         favs={[]}
-        setFavs={(favs) => (favs = favs.push(item))}
+        setFavs={(favs) => favs}
         savedFavs={[]}
       ></CharacterCard>
     );
@@ -117,13 +110,13 @@ describe("CharacterCard", () => {
         item={character}
         setOpenCharInf={{}}
         favs={[]}
-        setFavs={(favs) => (favs = favs.push(item))}
+        setFavs={(favs) => favs}
         savedFavs={[]}
       ></CharacterCard>
     );
     expect(screen.getByText("See complete info...")).toBeInTheDocument();
     expect(screen.getByTestId("img-item-big")).toBeInTheDocument();
     expect(screen.getByTestId("favorite-border")).toBeInTheDocument();
-    expect(document.querySelector("a").getAttribute("href")).toBe("/chars/1");
+    expect(screen.getByRole("link").getAttribute("href")).toBe("/chars/1");
   });
 });

@@ -49,7 +49,7 @@ test("should render Footer on Details page", () => {
 
 test("Footer renders link to repo", () => {
   render(<Footer />);
-  expect(document.querySelector("a").getAttribute("href")).toBe(
+  expect(screen.getByRole("link").getAttribute("href")).toBe(
     "https://github.com/vivitt/rick_morty_app"
   );
 });

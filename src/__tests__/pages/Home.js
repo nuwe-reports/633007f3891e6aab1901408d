@@ -1,14 +1,7 @@
 import React from "react";
 import axios from "axios";
-import {
-  screen,
-  render,
-  cleanup,
-  fireEvent,
-  waitFor,
-} from "@testing-library/react";
-import { MemoryRouter, Router } from "react-router-dom";
-import { createMemoryHistory } from "history";
+import { screen, render, cleanup, fireEvent } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 
 import Home from "../../pages/Home";
 
@@ -23,7 +16,7 @@ describe("Home", () => {
         <Home />
       </MemoryRouter>
     );
-    expect(document.querySelector("img").getAttribute("alt")).toBe(
+    expect(screen.getByTestId("rick-and-morty-img").getAttribute("alt")).toBe(
       "Rick holding Morty's eyes opened"
     );
     expect(screen.getByPlaceholderText("Name")).toBeInTheDocument();
@@ -70,7 +63,7 @@ describe("Home", () => {
       }
     );
     expect(await screen.findByText("LOGIN")).toBeInTheDocument();
-    expect(await screen.queryByText("REGISTER")).not.toBeInTheDocument();
+    expect(screen.queryByText("REGISTER")).not.toBeInTheDocument();
   });
 
   test("should toggle show password", async () => {
