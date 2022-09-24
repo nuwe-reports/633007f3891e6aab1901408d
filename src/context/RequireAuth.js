@@ -7,9 +7,7 @@ const RequireAuth = ({ children }) => {
   const email = localStorage.getItem("user");
 
   if (email === "") {
-    return (
-      <Navigate to="/rick_morty_app/" state={{ from: location }} replace />
-    );
+    return <Navigate to="/rick_morty_app" state={{ from: location }} replace />;
   }
   return children;
 };
