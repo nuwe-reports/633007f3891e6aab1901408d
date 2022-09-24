@@ -4,13 +4,15 @@ An app to navigate trough the characters from this TV show, get the basic info a
 
 This project is the Talent Squad's frontend challenge driven by Barcelona Digital Talent.
 
-## Badges
+[Rick and Morty APP](https://vivitt.github.io/rick_morty_app/)
+[![CodeFactor](https://www.codefactor.io/repository/github/vivitt/rick_morty_app/badge/master)](https://www.codefactor.io/repository/github/vivitt/rick_morty_app/overview/master)
 
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+![Home Page](public/Screenshot-01.png?raw=true?width=200px "Homepage register light mode")
 
-## Visuals
+![Home Page](public/Screenshot-02.png?raw=true?width=200px "Homepage login dark mode")
 
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+![Characters Page](public/Screenshot-03.png?raw=true "Characters page dark mode")
+![Characters Page](public/Screenshot-04.png?raw=true "Characters page with open view details light mode")
 
 ## API/Component
 
