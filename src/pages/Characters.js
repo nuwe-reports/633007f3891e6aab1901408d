@@ -61,7 +61,7 @@ const Characters = ({
 
   useEffect(() => {
     const localFavs = localStorage.getItem("favs");
-    if (localFavs.length) {
+    if (localFavs) {
       const parsedFavs = JSON.parse(localFavs);
       setSavedFavs([...parsedFavs]);
     }

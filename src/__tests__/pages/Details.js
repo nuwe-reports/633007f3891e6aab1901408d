@@ -8,7 +8,7 @@ import {
   waitFor,
 } from "@testing-library/react";
 import { MemoryRouter, Router } from "react-router-dom";
-import favs from "../favs.json";
+
 import Details from "../../pages/Details";
 import { createMemoryHistory } from "history";
 
@@ -86,6 +86,26 @@ const mockChar = {
   ],
   url: "https://rickandmortyapi.com/api/character/2",
   created: "2017-11-04T18:50:21.651Z",
+};
+const otherMockChar = {
+  id: 33,
+  name: "Beebo",
+  status: "Dead",
+  species: "Alien",
+  type: "",
+  gender: "Male",
+  origin: {
+    name: "Venzenulon 7",
+    url: "https://rickandmortyapi.com/api/location/10",
+  },
+  location: {
+    name: "Venzenulon 7",
+    url: "https://rickandmortyapi.com/api/location/10",
+  },
+  image: "https://rickandmortyapi.com/api/character/avatar/33.jpeg",
+  episode: ["https://rickandmortyapi.com/api/episode/29"],
+  url: "https://rickandmortyapi.com/api/character/33",
+  created: "2017-11-05T09:21:55.595Z",
 };
 const favChars = [
   {
@@ -439,7 +459,7 @@ describe("details", () => {
   });
 
   test("should navigate '/chars' when click on back btn", async () => {
-    const history = createMemoryHistory({ initialEntries: ["/chars/8"] });
+    const history = createMemoryHistory({ initialEntries: ["/chars/2"] });
     axios.get.mockResolvedValue({ data: mockChar });
     render(
       <Router location={history.location} navigator={history}>
@@ -450,5 +470,41 @@ describe("details", () => {
     expect(screen.getByText("Back")).toBeInTheDocument();
     fireEvent.click(screen.getByText("Back"));
     await waitFor(() => expect(history.location.pathname).toBe("/chars"));
+  });
+
+  test("should add correct emojis whe char is human alive", async () => {
+    const history = createMemoryHistory({ initialEntries: ["/chars/2"] });
+    axios.get.mockResolvedValue({ data: mockChar });
+    render(
+      <Router location={history.location} navigator={history}>
+        <Details />
+      </Router>
+    );
+
+    expect(
+      await screen.findByText(`👤 ${mockChar.species}, ${mockChar.gender}`)
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText(`🌱 ${mockChar.status}`)
+    ).toBeInTheDocument();
+    expect(await screen.findByText("🛸 Comes from")).toBeInTheDocument();
+  });
+  test("should add correct emojis whe char is alien dead", async () => {
+    const history = createMemoryHistory({ initialEntries: ["/chars/33"] });
+    axios.get.mockResolvedValue({ data: otherMockChar });
+    render(
+      <Router location={history.location} navigator={history}>
+        <Details />
+      </Router>
+    );
+
+    expect(
+      await screen.findByText(
+        `👽 ${otherMockChar.species}, ${otherMockChar.gender}`
+      )
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText(`💀 ${otherMockChar.status}`)
+    ).toBeInTheDocument();
   });
 });
