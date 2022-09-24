@@ -1,11 +1,13 @@
 # RICK and MORTY APP
 
+[Rick and Morty APP](https://vivitt.github.io/rick_morty_app/)
+[![CodeFactor](https://www.codefactor.io/repository/github/vivitt/rick_morty_app/badge/master)](https://www.codefactor.io/repository/github/vivitt/rick_morty_app/overview/master)
+
 An app to navigate trough the characters from this TV show, get the basic info and select your favorite ones.
 
 This project is the Talent Squad's frontend challenge driven by Barcelona Digital Talent.
 
-[Rick and Morty APP](https://vivitt.github.io/rick_morty_app/)
-[![CodeFactor](https://www.codefactor.io/repository/github/vivitt/rick_morty_app/badge/master)](https://www.codefactor.io/repository/github/vivitt/rick_morty_app/overview/master)
+
 
 ![Home Page](public/Screenshot-01.png?width=200px "Homepage register light mode")
 
