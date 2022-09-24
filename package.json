@@ -2,6 +2,7 @@
   "name": "rick-and-morty-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://vivitt.github.io/rick_morty_app/",
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -20,6 +21,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages-d build",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "test": "react-scripts test --coverage --watchAll=false"
@@ -41,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
   }
 }
