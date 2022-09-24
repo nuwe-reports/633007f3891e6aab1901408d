@@ -47,6 +47,7 @@ const Register = ({
         }
       })
       .catch(function (error) {
+        console.log(error);
         if (error.response.status === 400) {
           const errors = error.response.data.messages;
           const fields = error.response.data.fields;
