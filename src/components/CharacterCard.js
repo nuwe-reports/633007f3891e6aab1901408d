@@ -82,7 +82,7 @@ function CharacterCard({
                   <Link
                     underline="hover"
                     color="inherit"
-                    href={`/chars/${item.id}`}
+                    href={`/rick_morty_app/chars/${item.id}`}
                   >
                     See complete info...
                   </Link>
