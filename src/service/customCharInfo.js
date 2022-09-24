@@ -1,5 +1,5 @@
 export const nameSize = (str) => {
-  if (str.length > 20) {
+  if (str.length > 16) {
     return "h6";
   } else if (str.length > 6) {
     return "h5";
@@ -23,6 +23,12 @@ export const speciesIcon = (str) => {
     return "👤 " + str;
   } else if (str === "Alien") {
     return "👽 " + str;
+  } else if (str === "Mythological Creature") {
+    return "🧝🏽‍♂️ " + str;
+  } else if (str === "Disease") {
+    return "🦠 " + str;
+  } else if (str === "Robot") {
+    return "🤖 " + str;
   } else {
     return "❓ " + str;
   }

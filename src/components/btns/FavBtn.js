@@ -1,14 +1,22 @@
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { Button } from "@mui/material";
-
-const FavBtn = ({ savedFavs, favs, setFavs, item }) => {
+import { useEffect } from "react";
+const FavBtn = ({ favs, setFavs, savedFavs, setSavedFavs, item }) => {
   function addToFavs() {
-    setFavs([...favs, item]);
+    setSavedFavs([...savedFavs, item]);
+    setFavs([...savedFavs]);
   }
 
   function removeFromFavs() {
-    setFavs([...favs.filter((fav) => fav.name !== item.name)]);
+    setSavedFavs([...savedFavs.filter((fav) => fav.name !== item.name)]);
+    setFavs([...savedFavs]);
   }
+
+  useEffect(() => {
+    //set the fav item
+    const json = JSON.stringify(savedFavs);
+    localStorage.setItem("favs", json);
+  }, [favs]);
 
   return (
     <div data-testid="fav-btn">

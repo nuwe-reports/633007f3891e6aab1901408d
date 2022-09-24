@@ -18,6 +18,7 @@ const Login = ({
   showPassword,
   handleShowPass,
   setShowRegister,
+  setIsLoading,
 }) => {
   ///user
   const [email, setEmail] = useState("");
@@ -28,6 +29,7 @@ const Login = ({
   function loginUser(event) {
     event.preventDefault();
     const url = process.env.REACT_APP_LOGIN_URL;
+    setIsLoading(true);
     axios
       .post(url, {
         email: email,
@@ -40,6 +42,9 @@ const Login = ({
       })
       .catch(function (err) {
         setError(err.response.data.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 

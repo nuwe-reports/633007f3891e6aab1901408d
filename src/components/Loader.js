@@ -7,7 +7,7 @@ function Loader() {
         <img
           src={faces}
           alt="Rick and Morty faces looking to each other"
-          width="250px"
+          width="200px"
           data-testid="loader"
         ></img>
       </div>

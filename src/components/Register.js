@@ -13,7 +13,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const Register = ({
   setError,
-
+  setIsLoading,
   setErrMssg,
   handleShowPass,
   setShowRegister,
@@ -33,6 +33,7 @@ const Register = ({
 
   function registerUser(event) {
     event.preventDefault();
+    setIsLoading(true);
     const url = process.env.REACT_APP_REGISTER_URL;
     axios
       .post(url, {
@@ -63,6 +64,9 @@ const Register = ({
         } else if (error.response.status === 500) {
           setErrMssg("An unexpected error happened, please try again.");
         }
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
