@@ -4,7 +4,7 @@ import Appbar from "./components/Appbar";
 import Home from "./pages/Home";
 import Characters from "./pages/Characters";
 import NotFound from "./pages/NotFound";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Details from "./pages/Details";
 import RequireAuth from "./context/RequireAuth";
@@ -28,10 +28,10 @@ function App() {
           />
 
           <Routes>
-            <Route path="/rick_morty_app" element={<Home />} />
+            <Route path="#/rick_morty_app" element={<Home />} />
 
             <Route
-              path="/rick_morty_app/chars"
+              path="#/rick_morty_app/chars"
               element={
                 <RequireAuth>
                   <Characters
@@ -45,7 +45,7 @@ function App() {
               }
             />
             <Route
-              path="/rick_morty_app/chars/:id"
+              path="#/rick_morty_app/chars/:id"
               element={
                 <RequireAuth>
                   <Details isLoading={isLoading} setIsLoading={setIsLoading} />
@@ -53,7 +53,7 @@ function App() {
               }
             />
 
-            <Route path="/*" element={<NotFound />} />
+            <Route path="#/*" element={<NotFound />} />
           </Routes>
           <Footer></Footer>
         </div>
