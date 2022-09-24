@@ -117,6 +117,8 @@ describe("CharacterCard", () => {
     expect(screen.getByText("See complete info...")).toBeInTheDocument();
     expect(screen.getByTestId("img-item-big")).toBeInTheDocument();
     expect(screen.getByTestId("favorite-border")).toBeInTheDocument();
-    expect(screen.getByRole("link").getAttribute("href")).toBe("/chars/1");
+    expect(screen.getByRole("link").getAttribute("href")).toBe(
+      "/rick_morty_app/chars/1"
+    );
   });
 });
