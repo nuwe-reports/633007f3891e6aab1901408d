@@ -53,7 +53,7 @@ function App() {
               }
             />
 
-            <Route path="rick_morty_app/*" element={<NotFound />} />
+            <Route path="/*" element={<NotFound />} />
           </Routes>
           <Footer></Footer>
         </div>
