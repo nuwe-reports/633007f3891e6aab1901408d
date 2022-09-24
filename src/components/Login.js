@@ -38,7 +38,7 @@ const Login = ({
       .then(function (response) {
         localStorage.setItem("user", response.data.email);
 
-        navigate("#/rick_morty_app/chars", { replace: true });
+        navigate("/rick_morty_app/chars", { replace: true });
       })
       .catch(function (err) {
         setError(err.response.data.message);
