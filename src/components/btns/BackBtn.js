@@ -6,7 +6,7 @@ const BackBtn = () => {
   const navigate = useNavigate();
 
   const back = () => {
-    navigate("/chars");
+    navigate("/rick_morty_app/chars");
   };
   return (
     <Button
