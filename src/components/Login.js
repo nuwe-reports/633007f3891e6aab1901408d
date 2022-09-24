@@ -28,7 +28,7 @@ const Login = ({
   //login func
   function loginUser(event) {
     event.preventDefault();
-    const url = process.env.REACT_APP_LOGIN_URL;
+    const url = "https://the-movieapp.herokuapp.com/auth/login";
     setIsLoading(true);
     axios
       .post(url, {
@@ -38,7 +38,7 @@ const Login = ({
       .then(function (response) {
         localStorage.setItem("user", response.data.email);
 
-        navigate("/chars", { replace: true });
+        navigate("/rick_morty_app/chars", { replace: true });
       })
       .catch(function (err) {
         setError(err.response.data.message);
