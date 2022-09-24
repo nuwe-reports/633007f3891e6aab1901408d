@@ -1,22 +1,28 @@
-# RICK and MORTY APP
+<div id="header" align="center">
+  <h1> RICK and MORTY APP </h1>
+  
 
-[Rick and Morty APP](https://vivitt.github.io/rick_morty_app/)
+
+
+[🔗 Rick and Morty APP](https://vivitt.github.io/rick_morty_app/)
 
 
 [![CodeFactor](https://www.codefactor.io/repository/github/vivitt/rick_morty_app/badge/master)](https://www.codefactor.io/repository/github/vivitt/rick_morty_app/overview/master)
 
-An app to navigate trough the characters from this TV show, get the basic info and select your favorite ones.
+  <p>An app to navigate trough the characters from this TV show, get the basic info and select your favorite ones.</p>
+  <p>This project is the Talent Squad's frontend challenge driven by Barcelona Digital Talent.</p>
+  </div>
 
-This project is the Talent Squad's frontend challenge driven by Barcelona Digital Talent.
+
+<div align="center">
+
+<img src="public/Screenshot-01.png" alt="Homepage register light mode" width="400"  />
+<img src="public/Screenshot-02.png" alt="Homepage login dark mode" width="400" />
 
 
-
-![Home Page](public/Screenshot-01.png?width=200px "Homepage register light mode")
-
-![Home Page](public/Screenshot-02.png "Homepage login dark mode")
-
-![Characters Page](public/Screenshot-03.png?raw=true "Characters page dark mode")
-![Characters Page](public/Screenshot-04.png?raw=true "Characters page with open view details light mode")
+<img src="public/Screenshot-03.png" alt="Characters page dark mode" width="400"/>
+<img src="public/Screenshot-04.png" alt="Characters page with open view details light mode" width="400"/>
+</div>
 
 ## API/Component
 
