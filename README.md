@@ -3,7 +3,9 @@
   
 
 
+
 [🔗 Rick and Morty APP](https://vivitt.github.io/rick_morty_app/)
+
 
 [![CodeFactor](https://www.codefactor.io/repository/github/vivitt/rick_morty_app/badge/master)](https://www.codefactor.io/repository/github/vivitt/rick_morty_app/overview/master)
 
@@ -11,9 +13,12 @@
   <p>This project is the Talent Squad's frontend challenge driven by Barcelona Digital Talent.</p>
   </div>
 
+
 <div align="center">
+
 <img src="public/Screenshot-01.png" alt="Homepage register light mode" width="400"  />
 <img src="public/Screenshot-02.png" alt="Homepage login dark mode" width="400" />
+
 
 <img src="public/Screenshot-03.png" alt="Characters page dark mode" width="400"/>
 <img src="public/Screenshot-04.png" alt="Characters page with open view details light mode" width="400"/>
