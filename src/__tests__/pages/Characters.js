@@ -1,13 +1,6 @@
 import React from "react";
 import axios from "axios";
-import {
-  screen,
-  render,
-  cleanup,
-  fireEvent,
-  waitFor,
-  getByTestId,
-} from "@testing-library/react";
+import { screen, render, cleanup, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import Characters from "../../pages/Characters";
 

@@ -3,7 +3,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { LogoutRounded } from "@mui/icons-material";
 
 const LogoutBtn = ({ setFavs, setIsLoading, setLogoutError }) => {
   const navigate = useNavigate();

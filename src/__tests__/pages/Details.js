@@ -432,12 +432,6 @@ describe("details", () => {
   });
 
   test("should show error mssg when axios error", async () => {
-    const mockedError = {
-      response: {
-        status: 500,
-      },
-    };
-
     axios.get.mockRejectedValue({
       response: {
         status: 500,
