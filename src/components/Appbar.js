@@ -23,7 +23,7 @@ const ResponsiveAppBar = ({ setFavs, setIsLoading, setLogoutError }) => {
             variant="h6"
             noWrap
             component="a"
-            href="/rick_morty_app/chars"
+            href="/chars"
             sx={{
               mr: 2,
               display: { xs: "none", sm: "flex" },

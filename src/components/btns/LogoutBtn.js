@@ -19,7 +19,7 @@ const LogoutBtn = ({ setFavs, setIsLoading, setLogoutError }) => {
           localStorage.setItem("user", "");
           localStorage.setItem("favs", "");
           setFavs([]);
-          navigate("/rick_morty_app");
+          navigate("/");
         }
       })
       .catch((error) => {
