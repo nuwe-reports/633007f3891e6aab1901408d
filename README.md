@@ -1,6 +1,5 @@
 <div id="header" align="center">
   <h1> RICK and MORTY APP </h1>
-  
 
 
 
@@ -63,6 +62,6 @@ npm start
 
 This app was made with **React** and **MUI**
 
-**Axios** on the data request
+**Axios**
 
-**SASS** to write stylesheets
+**SASS**
