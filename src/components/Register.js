@@ -47,11 +47,10 @@ const Register = ({
         }
       })
       .catch(function (error) {
-        const errdata = error.response.json();
         console.log(error);
-        if (errdata.status === 400) {
-          const errors = errdata.data.messages;
-          const fields = errdata.data.fields;
+        if (error.response.status === 400) {
+          const errors = error.response.data.messages;
+          const fields = error.response.data.fields;
 
           if (fields.some((item) => item === "name"))
             setNameError(errors[fields.indexOf("name")]);

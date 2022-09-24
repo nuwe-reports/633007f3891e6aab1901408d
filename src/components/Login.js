@@ -41,8 +41,7 @@ const Login = ({
         navigate("/chars", { replace: true });
       })
       .catch(function (err) {
-        const errdata = error.response.json();
-        setError(errdata.data.message);
+        setError(err.response.data.message);
         console.log(error);
       })
       .finally(() => {
