@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 
 import Typography from "@mui/material/Typography";
-
+import { useState, useEffect } from "react";
 import Container from "@mui/material/Container";
 import Logo from "../assets/logo.png";
 import ToggleThemeBTN from "./btns/ToggleThemeBTN";
@@ -23,7 +23,7 @@ const ResponsiveAppBar = ({ setFavs, setIsLoading, setLogoutError }) => {
             variant="h6"
             noWrap
             component="a"
-            href="/chars"
+            href="/rick_morty_app/chars"
             sx={{
               mr: 2,
               display: { xs: "none", sm: "flex" },
@@ -51,7 +51,7 @@ const ResponsiveAppBar = ({ setFavs, setIsLoading, setLogoutError }) => {
             >
               <ToggleThemeBTN data-testid="toggle-btn"></ToggleThemeBTN>
             </Box>
-            {email !== "" && (
+            {email && (
               <LogoutBtn
                 setFavs={setFavs}
                 setIsLoading={setIsLoading}
