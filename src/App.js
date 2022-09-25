@@ -18,8 +18,8 @@ function App() {
   //logout error
   const [logoutError, setLogoutError] = useState(false);
   return (
-    <Paper>
-      <Router basename="/rick_morty_app">
+    <Router basename="/rick_morty_app">
+      <Paper>
         <div className="app">
           <Appbar
             setIsLoading={setIsLoading}
@@ -57,8 +57,8 @@ function App() {
           </Routes>
           <Footer></Footer>
         </div>
-      </Router>
-    </Paper>
+      </Paper>
+    </Router>
   );
 }
 

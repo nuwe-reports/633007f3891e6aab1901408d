@@ -51,7 +51,7 @@ const ResponsiveAppBar = ({ setFavs, setIsLoading, setLogoutError }) => {
             >
               <ToggleThemeBTN data-testid="toggle-btn"></ToggleThemeBTN>
             </Box>
-            {email && (
+            {email !== "" && (
               <LogoutBtn
                 setFavs={setFavs}
                 setIsLoading={setIsLoading}

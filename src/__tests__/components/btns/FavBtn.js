@@ -1,5 +1,11 @@
 import React from "react";
-import { screen, render, cleanup } from "@testing-library/react";
+import {
+  screen,
+  render,
+  cleanup,
+  fireEvent,
+  getByTestId,
+} from "@testing-library/react";
 
 import FavBtn from "../../../components/btns/FavBtn";
 
@@ -107,6 +113,4 @@ describe("FavBtn", () => {
     expect(screen.getByTestId("favorite")).toBeInTheDocument();
     expect(screen.queryByTestId("favorite-border")).not.toBeInTheDocument();
   });
-
-  //todo test("should add/remove fav", async () => {});
 });
