@@ -16,7 +16,8 @@ import Appbar from "../../components/Appbar";
 import Home from "../../pages/Home";
 
 jest.mock("axios");
-
+Storage.prototype.getItem = jest.fn();
+Storage.prototype.setItem = jest.fn();
 afterEach(cleanup);
 
 describe("Appbar", () => {
@@ -33,8 +34,8 @@ describe("Appbar", () => {
     expect(screen.getByTestId("toggle-btn")).toBeInTheDocument();
   });
 
-  test("should render Appbar on Character page", () => {
-    const route = "/chars";
+  test("should render Appbar on Character page", async () => {
+    const route = "rick_morty_app/chars";
 
     render(
       <MemoryRouter initialEntries={[route]}>
@@ -44,25 +45,31 @@ describe("Appbar", () => {
       </MemoryRouter>
     );
 
+    expect(localStorage.getItem).toHaveBeenCalled();
+
     expect(screen.getByTestId("logo-img")).toBeInTheDocument();
-    expect(screen.getByTestId("logout")).toBeInTheDocument();
+    expect(await screen.findByText("Logout")).toBeInTheDocument();
   });
 
   test("should navigate home on logout", async () => {
-    const history = createMemoryHistory({ initialEntries: ["/chars"] });
+    const history = createMemoryHistory({
+      initialEntries: ["/rick_morty_app/chars"],
+    });
     axios.get.mockResolvedValueOnce({ status: 200 });
+
     render(
       <Router location={history.location} navigator={history}>
         <ToggleColorModeProv>
           <Appbar
-            setLogoutError={(setLogoutError) => setLogoutError}
-            setFavs={(setFavs) => setFavs}
-            setIsLoading={(setIsLoading) => setIsLoading}
+            setLogoutError={() => null}
+            setFavs={() => null}
+            setIsLoading={() => null}
           />
         </ToggleColorModeProv>
       </Router>
     );
-    expect(screen.getByText("Logout")).toBeInTheDocument();
+    expect(localStorage.getItem).toHaveBeenCalled();
+    expect(await screen.findByText("Logout")).toBeInTheDocument();
     expect(screen.getByTestId("logout")).toBeInTheDocument();
     fireEvent.click(screen.getByText("Logout"));
     await waitFor(() => expect(history.location.pathname).toBe("/"));
@@ -71,7 +78,7 @@ describe("Appbar", () => {
   test("should render Appbar on Details page and navigate '/' on logout", async () => {
     axios.get.mockResolvedValueOnce({ status: 200 });
     const history = createMemoryHistory({ initialEntries: ["/chars/8"] });
-    window.localStorage.setItem("user", "vivi@gmail.com");
+
     render(
       <Router location={history.location} navigator={history}>
         <ToggleColorModeProv>
@@ -83,7 +90,7 @@ describe("Appbar", () => {
         </ToggleColorModeProv>
       </Router>
     );
-    expect(localStorage.getItem("user")).toEqual("vivi@gmail.com");
+    expect(localStorage.getItem).toHaveBeenCalled();
     expect(screen.getByText("Logout")).toBeInTheDocument();
     expect(screen.getByTestId("logout")).toBeInTheDocument();
     fireEvent.click(screen.getByText("Logout"));
