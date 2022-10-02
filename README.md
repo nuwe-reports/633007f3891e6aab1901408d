@@ -9,7 +9,7 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/vivitt/rick_morty_app/badge/master)](https://www.codefactor.io/repository/github/vivitt/rick_morty_app/overview/master)
 
   <p>An app to navigate trough the characters from this TV show, get the basic info and select your favorite ones.</p>
-  <p>This project is the Talent Squad's frontend challenge driven by Barcelona Digital Talent.</p>
+  <p>This project is my solution to the the Talent Squad's frontend challenge driven by Barcelona Digital Talent.</p>
   </div>
 
 
